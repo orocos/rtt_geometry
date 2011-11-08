@@ -1,0 +1,17 @@
+<package>
+  <description brief="kdl_lua">
+
+     kdl_lua, contains the kdl pretty printing lua module kdlpp.lua
+
+  </description>
+  <author>Nick Vanthienen, Markus Klotzbucher, first.last@mech.kuleuven.be</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://www.orocos.org/wiki/orocos/toolchain/orocostoolchainluacookbook#toc52</url>
+  
+  <depend package="ocl"/>
+  <depend package="kdl_typekit"/>
+
+</package>
+
+
