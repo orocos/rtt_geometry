@@ -267,7 +267,7 @@ namespace RTT
     };
 
     EulerZYXDecomposer::EulerZYXDecomposer( const Rotation& r)
-        : resultBag("KDL.EulerZYX"),
+        : resultBag("KDL.Rotation"),
           _a("alpha","First Rotate around the Z axis with alpha in radians" ),
           _b("beta","Then Rotate around the new Y axis with beta in radians" ),
           _g("gamma","Then Rotation around the new X axis with gamma in radians" )
@@ -280,7 +280,7 @@ namespace RTT
 
     bool EulerZYXComposer::getResult(Rotation& res )
     {
-        if ( bag.getType() == "KDL.EulerZYX" || bag.getType() == "MotCon::EulerZYX" )
+        if ( bag.getType() == "KDL.Rotation" || bag.getType() == "MotCon::Rotation" )
             {
 
                 // ZYX is deprecated, use alpha, beta, gamma. also alpha maps to Z and gamma to X !
@@ -342,7 +342,7 @@ namespace RTT
         bool getResult( Rotation& res);
     };
     RPYDecomposer::RPYDecomposer( const Rotation& r)
-        : resultBag("KDL.RPY" ),
+        : resultBag("KDL.Rotation" ),
           _r("R","First rotate around X with R(oll) in radians" ),
           _p("P","Next rotate around old Y with P(itch) in radians" ),
           _y("Y","Next rotate around old Z with Y(aw) in radians" )
@@ -355,7 +355,7 @@ namespace RTT
 
     bool RPYComposer::getResult(Rotation& res)
     {
-        if ( bag.getType() == "KDL.RPY" || bag.getType() == "MotCon::RPY" )
+        if ( bag.getType() == "KDL.Rotation" || bag.getType() == "MotCon::Rotation" )
             {
                 Property<double>* _r = dynamic_cast<Property<double>*>( bag.find("R") );
                 Property<double>* _p = dynamic_cast<Property<double>*>( bag.find("P") );
@@ -416,7 +416,7 @@ namespace RTT
             return true;
         else {
             Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Rotation > "
-                          << ": Expected type 'KDL.Rotation','KDL.EulerZYX' or 'KDL.RPY', got type '"<< bag.getType() <<"'."
+                          << ": Expected type 'KDL.Rotation', got type '"<< bag.getType() <<"'."
                           <<Logger::endl;
         }
         return false;
