@@ -1,11 +1,6 @@
-rosbuild_find_ros_package(ocl )
-rosbuild_find_ros_package(rtt )
-list(APPEND CMAKE_MODULE_PATH ${ocl_PACKAGE_PATH}/config)
-set(OROCOS-RTT_DIR ${rtt_PACKAGE_PATH}/install/lib/cmake/orocos-rtt)
-find_package(RTTPlugin REQUIRED rtt-marshalling)
-set(OROCOS-RTT_PLUGIN_PATH ${ocl_PACKAGE_PATH}/lib)
-find_package(RTTPlugin REQUIRED orocos-deployment)
-
-link_directories(${rtt_PACKAGE_PATH}/install/lib/orocos/plugins)
+orocos_use_package(ocl-deployment)
+find_package(OROCOS-RTT REQUIRED rtt-marshalling)
 rosbuild_add_gtest(test/typekit_test typekit_test.cpp)
-target_link_libraries(test/typekit_test ${RTT_PLUGIN_orocos-deployment_LIBRARIES} ${RTT_PLUGIN_rtt-marshalling_LIBRARIES} ${OROCOS-RTT_LIBRARIES})
+
+target_link_libraries(test/typekit_test ${OROCOS-RTT_RTT-MARSHALLING_LIBRARY})
+
