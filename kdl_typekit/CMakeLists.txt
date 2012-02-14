@@ -36,3 +36,4 @@ src/kdlTypekitRotation.cpp src/kdlTypekitSegment.cpp src/kdlTypekitTwist.cpp
 src/kdlTypekitVector.cpp src/kdlTypekitWrench.cpp src/motionproperties.cpp src/kinfamproperties.cpp )
 
 add_subdirectory(test)
+orocos_generate_package()
