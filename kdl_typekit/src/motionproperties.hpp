@@ -125,20 +125,20 @@ namespace RTT
 
     /**
      *
-     *    ORO_Geometry::Frame
+     *    ORO_Geometry::KDL::Frame
      *
      */
 
     /**
-     * Additional functionality for handling a Property<Frame>
+     * Additional functionality for handling a Property<KDL::Frame>
      */
-    void decomposeProperty(const Frame &f, PropertyBag& target);
+    void decomposeProperty(const KDL::Frame &f, PropertyBag& target);
 
     /**
      * Aim of this kind of functions : given a Property<PropertyBag> with one of the
-     * properties being a bag containing a Frame, fill the given non primitive Property<T>.
+     * properties being a bag containing a KDL::Frame, fill the given non primitive Property<T>.
      */
-    bool composeProperty(const PropertyBag& bag, Frame &f);
+    bool composeProperty(const PropertyBag& bag, KDL::Frame &f);
 }
 
 namespace RTT

@@ -512,7 +512,7 @@ namespace RTT
         return false;
     }
 
-    void decomposeProperty(const Frame &f, PropertyBag& targetbag )
+    void decomposeProperty(const KDL::Frame &f, PropertyBag& targetbag )
     {
         // construct a typed PropertyBag.
         targetbag.setType("KDL.Frame");
@@ -532,7 +532,7 @@ namespace RTT
         targetbag.add( new Property<PropertyBag>("M","", rot.result() ) );
     }
 
-    bool composeProperty(const PropertyBag& f_bag, Frame &f)
+    bool composeProperty(const PropertyBag& f_bag, KDL::Frame &f)
     {
         if ( f_bag.getType() == "KDL.Frame" ||  f_bag.getType() == "MotCon::Frame" )
             {
