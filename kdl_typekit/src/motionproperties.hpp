@@ -96,15 +96,15 @@ namespace RTT
      */
 
     /**
-     * Additional functionality for handling a Property<Twist>
+     * Additional functionality for handling a Property<KDL::Twist>
      */
-    void decomposeProperty(const Twist &t, PropertyBag& targetbag);
+    void decomposeProperty(const KDL::Twist &t, PropertyBag& targetbag);
 
     /**
      * Aim of this kind of functions : given a Property<PropertyBag> with one of the
      * properties being a bag containing a Twist, fill the given non primitive Property<T>.
      */
-    bool composeProperty(const PropertyBag& bag, Twist &t);
+    bool composeProperty(const PropertyBag& bag, KDL::Twist &t);
 
     /**
      *
@@ -113,15 +113,15 @@ namespace RTT
      */
 
     /**
-     * Additional functionality for handling a Property<Wrench>
+     * Additional functionality for handling a Property<KDL::Wrench>
      */
-    void decomposeProperty( const Wrench &b, PropertyBag& targetbag);
+    void decomposeProperty( const KDL::Wrench &b, PropertyBag& targetbag);
 
     /**
      * Aim of this kind of functions : given a Property<PropertyBag> with one of the
      * properties being a bag containing a Wrench, fill the given non primitive Property<T>.
      */
-    bool composeProperty(const PropertyBag& bag, Wrench &w);
+    bool composeProperty(const PropertyBag& bag, KDL::Wrench &w);
 
     /**
      *
