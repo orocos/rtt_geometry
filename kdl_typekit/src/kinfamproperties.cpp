@@ -150,7 +150,7 @@ namespace RTT
         targetbag.setType("KDL.JntArray");
         for(int i = 0; i < jntarray.data.rows(); i++)
         {
-          string rindx = boost::lexical_cast<string>( i );
+          std::string rindx = boost::lexical_cast<std::string>( i );
           targetbag.add(new Property<double>("Element" + rindx,"JntArray element",jntarray.data(i)));
         }
     }
@@ -178,8 +178,8 @@ namespace RTT
       targetbag.setType("KDL.Jacobian");
       for(int i = 0; i < jacobian.data.rows(); i++){
         for(int j = 0; j < jacobian.data.cols(); j++){
-          string rindx = boost::lexical_cast<string>( i );
-          string cindx = boost::lexical_cast<string>( j );
+          std::string rindx = boost::lexical_cast<std::string>( i );
+          std::string cindx = boost::lexical_cast<std::string>( j );
           targetbag.add(new Property<double>("Element (" + rindx + "," + cindx + ")","Jacobian element",jacobian.data(i,j)));
         }
       }
