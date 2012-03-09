@@ -179,6 +179,15 @@ namespace KDL{
         ti->type("KDL.Wrench")->addConstructor( newConstructor(&wrenchft) );
         ti->type("KDL.Twist")->addConstructor( newConstructor(&twistvw) );
 
+        RTT::Service::shared_ptr gs = RTT::internal::GlobalService::Instance();
+
+        gs->provides("KDL")->provides("Rotation")->addOperation("RotX",&Rotation::RotX).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("RotY",&Rotation::RotY).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("RotZ",&Rotation::RotZ).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("RPY",&Rotation::RPY).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("EulerZYX",&Rotation::EulerZYX).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("EulerZYZ",&Rotation::EulerZYZ).doc("");
+        gs->provides("KDL")->provides("Rotation")->addOperation("Quaternion",&Rotation::Quaternion).doc("");
         
         //ti->type("Frame[]")->addConstructor(newConstructor(stdvector_ctor<Frame>() ) );
         //ti->type("Frame[]")->addConstructor(newConstructor(stdvector_ctor2<Frame>() ) );
