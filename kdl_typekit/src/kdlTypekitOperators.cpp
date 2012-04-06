@@ -1,6 +1,15 @@
 #include "kdlTypekit.hpp"
 
 namespace KDL{
+
+  Rotation Inverse(const Rotation& rot){
+    return rot.Inverse();
+  }
+
+  Frame Inverse(const Frame& f){
+    return f.Inverse();
+  }
+
   bool KDLTypekitPlugin::loadOperators()
   {
     OperatorRepository::shared_ptr oreg = OperatorRepository::Instance();
@@ -39,18 +48,18 @@ namespace KDL{
 
     RTT::Service::shared_ptr gs = RTT::internal::GlobalService::Instance();
 
-    gs->provides("KDL")->addOperation("Vector_diff",(Vector (*) (const Vector&, const Vector&, double)) &diff).doc("");
-    gs->provides("KDL")->addOperation("Rotation_diff",(Vector (*) (const Rotation&, const Rotation&, double)) &diff).doc("");
-    gs->provides("KDL")->addOperation("Twist_diff",(Twist (*) (const Twist&, const Twist&, double)) &diff).doc("");
-    gs->provides("KDL")->addOperation("Wrench_diff",(Wrench (*) (const Wrench&, const Wrench&, double)) &diff).doc("");
-    gs->provides("KDL")->addOperation("Frame_diff",(Twist (*) (const Frame&, const Frame&, double)) &diff)
+    gs->provides("KDL")->provides("Vector")->addOperation("diff",(Vector (*) (const Vector&, const Vector&, double)) &diff).doc("");
+    gs->provides("KDL")->provides("Vector")->addOperation("addDelta",(Vector (*) (const Vector&, const Vector&, double)) &addDelta).doc("");
+    gs->provides("KDL")->provides("Rotation")->addOperation("diff",(Vector (*) (const Rotation&, const Rotation&, double)) &diff).doc("");
+    gs->provides("KDL")->provides("Rotation")->addOperation("addDelta",(Rotation (*) (const Rotation&, const Vector&, double)) &addDelta).doc("");
+    gs->provides("KDL")->provides("Rotation")->addOperation("Inverse",(Rotation (*) (const Rotation&)) &Inverse).doc("");
+    gs->provides("KDL")->provides("Twist")->addOperation("diff",(Twist (*) (const Twist&, const Twist&, double)) &diff).doc("");
+    gs->provides("KDL")->provides("Wrench")->addOperation("diff",(Wrench (*) (const Wrench&, const Wrench&, double)) &diff).doc("");
+    gs->provides("KDL")->provides("Frame")->addOperation("diff",(Twist (*) (const Frame&, const Frame&, double)) &diff)
 	    .doc("Returns the twist that is needed to move from frame f1 to frame f2 in a time d. The resulting twist is represented in the same reference frame as f1 and f2, and has reference point at the origin of f1");
-
-    gs->provides("KDL")->addOperation("Vector_addDelta",(Vector (*) (const Vector&, const Vector&, double)) &addDelta).doc("");
-    gs->provides("KDL")->addOperation("Rotation_addDelta",(Rotation (*) (const Rotation&, const Vector&, double)) &addDelta).doc("");
-    gs->provides("KDL")->addOperation("Frame_addDelta", (Frame (*) (const Frame&, const Twist&, double)) &addDelta)
+    gs->provides("KDL")->provides("Frame")->addOperation("addDelta", (Frame (*) (const Frame&, const Twist&, double)) &addDelta)
 	    .doc("Constructs a frame that is obtained by: starting from frame f, apply twist t, during time d");
-
+    gs->provides("KDL")->provides("Frame")->addOperation("Inverse",(Frame (*) (const Frame&)) &Inverse).doc("");
     return true;
   }
 }
