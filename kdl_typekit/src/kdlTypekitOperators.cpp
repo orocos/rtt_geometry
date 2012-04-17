@@ -1,4 +1,5 @@
 #include "kdlTypekit.hpp"
+#include "geometry_msgs/typekit/Types.hpp"
 
 namespace KDL{
 
@@ -8,6 +9,10 @@ namespace KDL{
 
   Frame Inverse(const Frame& f){
     return f.Inverse();
+  }
+
+  void GetQuaternion(const Rotation& r, geometry_msgs::Quaternion& q){
+    r.GetQuaternion(q.x,q.y,q.z,q.w);
   }
 
   bool KDLTypekitPlugin::loadOperators()
@@ -50,11 +55,14 @@ namespace KDL{
 
     gs->provides("KDL")->provides("Vector")->addOperation("diff",(Vector (*) (const Vector&, const Vector&, double)) &diff).doc("");
     gs->provides("KDL")->provides("Vector")->addOperation("addDelta",(Vector (*) (const Vector&, const Vector&, double)) &addDelta).doc("");
+
     gs->provides("KDL")->provides("Rotation")->addOperation("diff",(Vector (*) (const Rotation&, const Rotation&, double)) &diff).doc("");
     gs->provides("KDL")->provides("Rotation")->addOperation("addDelta",(Rotation (*) (const Rotation&, const Vector&, double)) &addDelta).doc("");
     gs->provides("KDL")->provides("Rotation")->addOperation("Inverse",(Rotation (*) (const Rotation&)) &Inverse).doc("");
+    gs->provides("KDL")->provides("Rotation")->addOperation("GetQuaternion",(void (*)(const Rotation&, geometry_msgs::Quaternion&)) &GetQuaternion).doc("");
     gs->provides("KDL")->provides("Twist")->addOperation("diff",(Twist (*) (const Twist&, const Twist&, double)) &diff).doc("");
     gs->provides("KDL")->provides("Wrench")->addOperation("diff",(Wrench (*) (const Wrench&, const Wrench&, double)) &diff).doc("");
+
     gs->provides("KDL")->provides("Frame")->addOperation("diff",(Twist (*) (const Frame&, const Frame&, double)) &diff)
 	    .doc("Returns the twist that is needed to move from frame f1 to frame f2 in a time d. The resulting twist is represented in the same reference frame as f1 and f2, and has reference point at the origin of f1");
     gs->provides("KDL")->provides("Frame")->addOperation("addDelta", (Frame (*) (const Frame&, const Twist&, double)) &addDelta)
