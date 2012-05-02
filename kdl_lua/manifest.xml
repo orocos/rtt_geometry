@@ -11,6 +11,7 @@
   
   <depend package="ocl"/>
   <depend package="kdl_typekit"/>
+  <depend package="kdl_conversions"/>
 
 </package>
 

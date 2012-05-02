@@ -61,3 +61,14 @@ end
 function add_delta_rot(r,v,dt)
    return rtt.provides("KDL"):provides("Rotation"):addDelta(r,v,dt)
 end
+
+function frame_to_msg(f)
+   msg = rtt.Variable("geometry_msgs/Pose")
+   rtt.provides("KDL"):FrameToMsg(f,msg)
+   return msg
+end
+function msg_to_frame(msg)
+   f = rtt.Variable("KDL/Frame")
+   rtt.provides("KDL"):MsgToFrame(msg,f)
+   return f
+end
