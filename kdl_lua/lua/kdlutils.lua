@@ -22,6 +22,17 @@ function transl(x,y,z)
    f:fromtab{p={Y=y,X=x,Z=z}}
    return f
 end
+
+function quat(x,y,z,w)
+   return rtt.provides("KDL"):provides("Rotation"):Quaternion(x,y,z,w)
+end
+
+function get_quat(r)
+   local q = rtt.Variable("geometry_msgs/Quaternion")
+   rtt.provides("KDL"):provides("Rotation"):GetQuaternion(r,q)
+   return q
+end
+
 function inv(f)
    return rtt.provides("KDL"):provides("Frame"):Inverse(f)
 end
@@ -32,6 +43,21 @@ function diff(a,b)
    f2:assign(b)
    return rtt.provides("KDL"):provides("Frame"):diff(f1,f2,1.0)
 end
+
 function addDelta(f,d)
    return rtt.provides("KDL"):provides("Frame"):addDelta(f,d,1.0)
+end
+
+function diff_rot(a,b,dt)
+   local r1=rtt.Variable("KDL.Rotation")
+   local r2=rtt.Variable("KDL.Rotation")
+   local delta_time = rtt.Variable("double")
+   r1:assign(a)
+   r2:assign(b)
+   delta_time:assign(dt)
+   return rtt.provides("KDL"):provides("Rotation"):diff(r1,r2,delta_time)
+end
+
+function add_delta_rot(r,v,dt)
+   return rtt.provides("KDL"):provides("Rotation"):addDelta(r,v,dt)
 end

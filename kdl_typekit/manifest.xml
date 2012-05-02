@@ -11,5 +11,6 @@
     <depend package="rtt" />
     <depend package="ocl" />
     <depend package="orocos_kdl" />
+    <depend package="rtt_geometry_msgs" />
 </package>
 
