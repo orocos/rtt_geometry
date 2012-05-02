@@ -32,3 +32,6 @@ function diff(a,b)
    f2:assign(b)
    return rtt.provides("KDL"):provides("Frame"):diff(f1,f2,1.0)
 end
+function addDelta(f,d)
+   return rtt.provides("KDL"):provides("Frame"):addDelta(f,d,1.0)
+end
