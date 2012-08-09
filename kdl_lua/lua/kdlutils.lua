@@ -27,12 +27,6 @@ function quat(x,y,z,w)
    return rtt.provides("KDL"):provides("Rotation"):Quaternion(x,y,z,w)
 end
 
-function get_quat(r)
-   local q = rtt.Variable("geometry_msgs/Quaternion")
-   rtt.provides("KDL"):provides("Rotation"):GetQuaternion(r,q)
-   return q
-end
-
 function inv(f)
    return rtt.provides("KDL"):provides("Frame"):Inverse(f)
 end
