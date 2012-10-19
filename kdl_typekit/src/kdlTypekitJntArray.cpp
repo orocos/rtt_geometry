@@ -26,11 +26,28 @@ namespace KDL{
     }
 
     struct JntArrayTypeInfo : public types::TemplateTypeInfo<JntArray,true>
+#if (RTT_VERSION_MAJOR*100+RTT_VERSION_MINOR) >= 206
+                            , public MemberFactory
+#endif
     {
         JntArrayTypeInfo():TemplateTypeInfo<JntArray, true >("KDL.JntArray")
         {
         }
         
+#if (RTT_VERSION_MAJOR*100+RTT_VERSION_MINOR) >= 206
+            bool installTypeInfoObject(TypeInfo* ti) {
+                // aquire a shared reference to the this object
+                boost::shared_ptr< JntArrayTypeInfo > mthis = boost::dynamic_pointer_cast<JntArrayTypeInfo >( this->getSharedPtr() );
+                assert(mthis);
+                // Allow base to install first
+                TemplateTypeInfo<JntArray,true>::installTypeInfoObject(ti);
+                // Install the factories for primitive types
+                ti->setMemberFactory( mthis );
+                // Don't delete us, we're memory-managed.
+                return false;
+            }
+#endif
+
             /**
              * Specialize to resize \a result given the size of \a source.
              */
