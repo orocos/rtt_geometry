@@ -29,8 +29,65 @@ namespace KDL{
     {
         JntArrayTypeInfo():TemplateTypeInfo<JntArray, true >("KDL.JntArray")
         {
-        };
+        }
         
+            /**
+             * Specialize to resize \a result given the size of \a source.
+             */
+            bool composeType( base::DataSourceBase::shared_ptr dssource, base::DataSourceBase::shared_ptr dsresult) const {
+                const internal::DataSource<PropertyBag>* pb = dynamic_cast< const internal::DataSource<PropertyBag>* > (dssource.get() );
+                if ( !pb )
+                    return false;
+                typename internal::AssignableDataSource<JntArray>::shared_ptr ads = boost::dynamic_pointer_cast< internal::AssignableDataSource<JntArray> >( dsresult );
+                if ( !ads )
+                    return false;
+
+                PropertyBag const& source = pb->rvalue();
+                typename internal::AssignableDataSource<JntArray>::reference_t result = ads->set();
+
+                // take into account sequences:
+                base::PropertyBase* sz = source.find("Size");
+                if (!sz)
+                    sz = source.find("size");
+                if (sz)
+                {
+                    internal::DataSource<int>::shared_ptr sz_ds = internal::DataSource<int>::narrow(sz->getDataSource().get());
+                    if (sz_ds)
+                        result.resize( sz_ds->get() );
+                }
+                else
+                {
+                    // no size found, inform parent of number of elements to come:
+                    result.resize( source.size() );
+                }
+                // recurse into items of this sequence:
+                PropertyBag target( source.getType() );
+                PropertyBag decomp;
+                internal::ReferenceDataSource<JntArray> rds(result);
+                rds.ref(); // prevent dealloc.
+                // we compose each item in this sequence and then update result with target's result.
+                // 1. each child is composed into target (this is a recursive thing)
+                // 2. we decompose result one-level deep and 'refresh' it with the composed children of step 1.
+                if ( composePropertyBag(source, target) && typeDecomposition( &rds, decomp, false) && ( decomp.getType() == target.getType() ) && refreshProperties(decomp, target, true) ) {
+                    assert(result.rows() == source.size());
+                    assert(source.size() == target.size());
+                    assert(source.size() == decomp.size());
+                    ads->updated();
+                    Logger::log() <<Logger::Debug<<"Successfuly composed type from "<< source.getType() <<Logger::endl;
+                    return true;
+                }
+                return false;
+            }
+
+            /**
+             * Use getMember() for decomposition...
+             */
+            base::DataSourceBase::shared_ptr decomposeType(base::DataSourceBase::shared_ptr source) const
+            {
+                return base::DataSourceBase::shared_ptr();
+            }
+
+
         bool resize(base::DataSourceBase::shared_ptr arg, int size) const
         {
             if (arg->isAssignable()) {
