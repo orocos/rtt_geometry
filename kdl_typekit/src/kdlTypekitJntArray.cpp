@@ -55,12 +55,12 @@ namespace KDL{
                 const internal::DataSource<PropertyBag>* pb = dynamic_cast< const internal::DataSource<PropertyBag>* > (dssource.get() );
                 if ( !pb )
                     return false;
-                typename internal::AssignableDataSource<JntArray>::shared_ptr ads = boost::dynamic_pointer_cast< internal::AssignableDataSource<JntArray> >( dsresult );
+                internal::AssignableDataSource<JntArray>::shared_ptr ads = boost::dynamic_pointer_cast< internal::AssignableDataSource<JntArray> >( dsresult );
                 if ( !ads )
                     return false;
 
                 PropertyBag const& source = pb->rvalue();
-                typename internal::AssignableDataSource<JntArray>::reference_t result = ads->set();
+                internal::AssignableDataSource<JntArray>::reference_t result = ads->set();
 
                 // take into account sequences:
                 base::PropertyBase* sz = source.find("Size");
