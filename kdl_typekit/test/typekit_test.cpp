@@ -29,7 +29,6 @@ protected:
     {}
 
     virtual void SetUp(){
-         
     }
     virtual void TearDown(){
     }
@@ -107,18 +106,41 @@ TEST_F(KDLPluginTest,writeProperties)
     //EXPECT_TRUE(depl.getProperty(chain_prop.getName())->ready());
     EXPECT_TRUE(depl.addProperty(frame_prop));
     //EXPECT_TRUE(depl.addProperty(jacobian_prop));
-    //EXPECT_TRUE(depl.addProperty(jntarray_prop));
+    EXPECT_TRUE(depl.addProperty(jntarray_prop));
     EXPECT_TRUE(depl.addProperty(joint_prop));
     EXPECT_TRUE(depl.addProperty(rotation_prop));
     EXPECT_TRUE(depl.addProperty(segment_prop));
     EXPECT_TRUE(depl.addProperty(twist_prop));
     EXPECT_TRUE(depl.addProperty(vector_prop));
     EXPECT_TRUE(depl.addProperty(wrench_prop));
+
+    KDL::random(frame);
+    KDL::random(twist);
+    KDL::random(vector);
+    KDL::random(wrench);
+    KDL::random(rotation);
+    jntarray.resize(3);
+    KDL::random(jntarray(0));
+    KDL::random(jntarray(1));
+    KDL::random(jntarray(2));
+    frame_prop.value()=frame;
+    twist_prop.value()=twist;
+    vector_prop.value()=vector;
+    wrench_prop.value()=wrench;
+    rotation_prop.value()=rotation;
+    jntarray_prop.value()=jntarray;
     
     EXPECT_TRUE(marsh->storeProperties("test/test.cpf"));
     EXPECT_TRUE(marsh->writeProperties("test/test1.cpf"));
     EXPECT_TRUE(marsh->updateFile("test/test1.cpf"));
     EXPECT_TRUE(marsh->readProperties("test/test.cpf"));
+
+    EXPECT_EQ(frame_prop.value(),frame);
+    EXPECT_EQ(twist_prop.value(),twist);
+    EXPECT_EQ(vector_prop.value(),vector);
+    EXPECT_EQ(wrench_prop.value(),wrench);
+    EXPECT_EQ(rotation_prop.value(),rotation);
+    EXPECT_EQ(jntarray_prop.value(),jntarray);
 }
 
 int ORO_main(int argc, char **argv){
