@@ -7,6 +7,7 @@
 #include <kdl/chain.hpp>
 #include <kdl/jacobian.hpp>
 #include <kdl/jntarray.hpp>
+#include <kdl/frames_io.hpp>
 #include <rtt/os/main.h>
 
 class KDLPluginTest : public testing::Test {
