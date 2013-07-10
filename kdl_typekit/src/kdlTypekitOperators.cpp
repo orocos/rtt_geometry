@@ -1,4 +1,5 @@
 #include "kdlTypekit.hpp"
+#include <kdl/frames.hpp>
 
 namespace KDL{
 
@@ -8,6 +9,10 @@ namespace KDL{
 
   Frame Inverse(const Frame& f){
     return f.Inverse();
+  }
+
+  void GetQuaternion(const Rotation& rot,double& x, double& y, double& z, double& w){
+    rot.GetQuaternion(x,y,z,w);
   }
 
   bool KDLTypekitPlugin::loadOperators()
@@ -54,6 +59,8 @@ namespace KDL{
     gs->provides("KDL")->provides("Rotation")->addOperation("diff",(Vector (*) (const Rotation&, const Rotation&, double)) &diff).doc("");
     gs->provides("KDL")->provides("Rotation")->addOperation("addDelta",(Rotation (*) (const Rotation&, const Vector&, double)) &addDelta).doc("");
     gs->provides("KDL")->provides("Rotation")->addOperation("Inverse",(Rotation (*) (const Rotation&)) &Inverse).doc("");
+    gs->provides("KDL")->provides("Rotation")->addOperation("GetQuaternion",(void (*)(const Rotation&, double&, double&, double&, double&)) &GetQuaternion).doc("");
+    
     gs->provides("KDL")->provides("Twist")->addOperation("diff",(Twist (*) (const Twist&, const Twist&, double)) &diff).doc("");
     gs->provides("KDL")->provides("Wrench")->addOperation("diff",(Wrench (*) (const Wrench&, const Wrench&, double)) &diff).doc("");
 
