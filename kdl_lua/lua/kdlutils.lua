@@ -27,6 +27,15 @@ function quat(x,y,z,w)
    return rtt.provides("KDL"):provides("Rotation"):Quaternion(x,y,z,w)
 end
 
+function get_quat(rot)
+   x = rtt.Variable("double")
+   y = rtt.Variable("double")
+   z = rtt.Variable("double")
+   w = rtt.Variable("double")
+   rtt.provides("KDL"):provides("Rotation"):GetQuaternion(rot,x,y,z,w)
+   return x,y,z,w
+end
+
 function inv(f)
    return rtt.provides("KDL"):provides("Frame"):Inverse(f)
 end
