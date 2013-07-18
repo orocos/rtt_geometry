@@ -17,7 +17,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#include "eigen_toolkit.hpp"
+#include "eigen_typekit.hpp"
 #include <rtt/Property.hpp>
 #include <rtt/PropertyBag.hpp>
 #include <rtt/types/TemplateTypeInfo.hpp>
@@ -380,19 +380,19 @@ namespace Eigen{
     };
 
 
-    std::string EigenToolkitPlugin::getName()
+    std::string EigenTypekitPlugin::getName()
     {
         return "Eigen";
     }
 
-    bool EigenToolkitPlugin::loadTypes()
+    bool EigenTypekitPlugin::loadTypes()
     {
         RTT::types::TypeInfoRepository::Instance()->addType( new VectorTypeInfo() );
         RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo() );
         return true;
     }
 
-    bool EigenToolkitPlugin::loadConstructors()
+    bool EigenTypekitPlugin::loadConstructors()
     {
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_constructor()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_value_constructor()));
@@ -401,7 +401,7 @@ namespace Eigen{
         return true;
     }
 
-    bool EigenToolkitPlugin::loadOperators()
+    bool EigenTypekitPlugin::loadOperators()
     {
         RTT::types::OperatorRepository::Instance()->add( newBinaryOperator( "[]", vector_index() ) );
         //RTT::types::OperatorRepository::Instance()->add( newDotOperator( "size", get_size() ) );
@@ -410,4 +410,4 @@ namespace Eigen{
     }
 }
 
-ORO_TYPEKIT_PLUGIN(Eigen::EigenToolkitPlugin)
+ORO_TYPEKIT_PLUGIN(Eigen::EigenTypekitPlugin)

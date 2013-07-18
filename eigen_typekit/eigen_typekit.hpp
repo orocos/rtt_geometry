@@ -19,17 +19,16 @@
  Alternatively, the contents of this file may be used under the terms of
  either of the New BSD License
  */
-#ifndef UBLAS_TOOLKIT_HPP
-#define UBLAS_TOOLKIT_HPP
+#ifndef EIGEN_TYPEKIT_HPP
+#define EIGEN_TYPEKIT_HPP
 
 #include <rtt/types/TypekitPlugin.hpp>
 #include <Eigen/Core>
 
 // import most common Eigen types 
-USING_PART_OF_NAMESPACE_EIGEN
 namespace Eigen {
 
-class EigenToolkitPlugin: public RTT::types::TypekitPlugin {
+class EigenTypekitPlugin: public RTT::types::TypekitPlugin {
 public:
 	virtual std::string getName();
 
@@ -88,5 +87,5 @@ public:
     extern template class RTT::Constant< Eigen::MatrixXd >;
 #endif
 
-#endif
+#endif // ifndef EIGEN_TYPEKIT_HPP
 
