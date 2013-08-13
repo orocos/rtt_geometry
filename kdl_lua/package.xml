@@ -1,0 +1,37 @@
+<package>
+  <name>kdl_lua</name>
+  <version>0.4.0</version>
+  <description>kdl_lua, contains the kdl pretty printing lua module kdlpp.lua</description>
+  <maintainer email="first.last@mech.kuleuven.be">Nick Vanthienen</maintainer>
+  <maintainer email="first.last@mech.kuleuven.be">Markus Klotzbucher</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://www.orocos.org/wiki/orocos/toolchain/orocostoolchainluacookbook#toc52</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Nick Vanthienen</author>
+  <author>Markus Klotzbucher</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>ocl</build_depend>
+  <build_depend>kdl_typekit</build_depend>
+  <build_depend>rtt_kdl_conversions</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>ocl</run_depend>
+  <run_depend>kdl_typekit</run_depend>
+  <run_depend>rtt_kdl_conversions</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>ocl</test_depend> -->
+  <!-- <test_depend>kdl_typekit</test_depend> -->
+  <!-- <test_depend>rtt_kdl_conversions</test_depend> -->
+
+  <export>
+
+  </export>
+</package>
