@@ -12,9 +12,9 @@ catkin_package(DEPENDS rtt ocl orocos_kdl)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 
-find_package(Orocos-KDL)
-include_directories(${Orocos-KDL_INCLUDE_DIRS})
-link_directories(${Orocos-KDL_LIBRARY_DIRS})
+find_package(orocos_kdl)
+include_directories(${orocos_kdl_INCLUDE_DIRS})
+link_directories(${orocos_kdl_LIBRARY_DIRS})
 
 # Define the way rotation properties get written to XML
 # Set one of the two options below to write them as EULER ZYX or RPY
@@ -39,7 +39,7 @@ orocos_typekit(${PROJECT_NAME}
   src/motionproperties.cpp
   src/kinfamproperties.cpp
   )
-target_link_libraries(${PROJECT_NAME} orocos-kdl)
+target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
 
 add_subdirectory(test)
 orocos_generate_package()
