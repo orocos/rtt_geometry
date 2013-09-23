@@ -1,5 +1,6 @@
 # http://ros.org/doc/groovy/api/catkin/html/user_guide/supposed.html
 cmake_minimum_required(VERSION 2.8.3)
+
 project(kdl_typekit)
 # Load catkin and all dependencies required for this package
 # TODO: remove all from COMPONENTS that are not catkin packages.
@@ -12,9 +13,12 @@ catkin_package(DEPENDS rtt ocl orocos_kdl)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 
-find_package(orocos_kdl)
+find_package(Orocos-KDL REQUIRED)
 include_directories(${orocos_kdl_INCLUDE_DIRS})
 link_directories(${orocos_kdl_LIBRARY_DIRS})
+
+find_package(Eigen REQUIRED)
+include_directories(${Eigen_INCLUDE_DIRS})
 
 # Define the way rotation properties get written to XML
 # Set one of the two options below to write them as EULER ZYX or RPY
@@ -42,5 +46,5 @@ orocos_typekit(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
 
 add_subdirectory(test)
-orocos_generate_package()
 
+orocos_generate_package()
