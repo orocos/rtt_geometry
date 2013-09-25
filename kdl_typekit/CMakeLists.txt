@@ -43,7 +43,7 @@ orocos_typekit(${PROJECT_NAME}
   src/motionproperties.cpp
   src/kinfamproperties.cpp
   )
-target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Orocos-KDL_LIBRARIES})
 
 add_subdirectory(test)
 

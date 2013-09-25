@@ -6,7 +6,7 @@
 
   <license>LGPL / BSD</license>
 
-  <url type="website">http://ros.org/wiki/orocos_kdl</url>
+  <url type="website">http://ros.org/wiki/orocos-kdl</url>
   <!-- <url type="bugtracker"></url> -->
 
   <author>Steven Bellens</author>
@@ -27,7 +27,7 @@
   <!-- Dependencies needed only for running tests. -->
   <!-- <test_depend>rtt</test_depend> -->
   <!-- <test_depend>ocl</test_depend> -->
-  <!-- <test_depend>orocos_kdl</test_depend> -->
+  <!-- <test_depend>orocos-kdl</test_depend> -->
 
   <export>
 
