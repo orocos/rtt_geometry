@@ -6,7 +6,7 @@
 
   <license>LGPL / BSD</license>
 
-  <url type="website">http://ros.org/wiki/orocos-kdl</url>
+  <url type="website">http://ros.org/wiki/kdl_typekit</url>
   <!-- <url type="bugtracker"></url> -->
 
   <author>Steven Bellens</author>
@@ -17,17 +17,12 @@
   <!-- Dependencies needed to compile this pacakge. -->
   <build_depend>rtt</build_depend>
   <build_depend>ocl</build_depend>
-  <build_depend>orocos-kdl</build_depend>
+  <build_depend>kdl</build_depend>
 
   <!-- Dependencies needed after this package is compiled. -->
   <run_depend>rtt</run_depend>
   <run_depend>ocl</run_depend>
-  <run_depend>orocos-kdl</run_depend>
-
-  <!-- Dependencies needed only for running tests. -->
-  <!-- <test_depend>rtt</test_depend> -->
-  <!-- <test_depend>ocl</test_depend> -->
-  <!-- <test_depend>orocos-kdl</test_depend> -->
+  <run_depend>kdl</run_depend>
 
   <export>
 

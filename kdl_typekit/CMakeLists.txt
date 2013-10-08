@@ -6,7 +6,7 @@ project(kdl_typekit)
 # TODO: remove all from COMPONENTS that are not catkin packages.
 find_package(catkin REQUIRED COMPONENTS)
 
-catkin_package(DEPENDS rtt ocl orocos-kdl)
+catkin_package(DEPENDS rtt ocl kdl)
 
 # Defines the orocos_* cmake macros. See that file for additional
 # documentation.
