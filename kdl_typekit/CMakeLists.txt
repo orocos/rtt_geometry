@@ -2,11 +2,10 @@
 cmake_minimum_required(VERSION 2.8.3)
 
 project(kdl_typekit)
-# Load catkin and all dependencies required for this package
-# TODO: remove all from COMPONENTS that are not catkin packages.
-find_package(catkin REQUIRED COMPONENTS)
 
-catkin_package(DEPENDS rtt ocl kdl)
+find_package(catkin)
+
+catkin_package()
 
 # Defines the orocos_* cmake macros. See that file for additional
 # documentation.
@@ -43,6 +42,7 @@ orocos_typekit(${PROJECT_NAME}
   src/motionproperties.cpp
   src/kinfamproperties.cpp
   )
+
 target_link_libraries(${PROJECT_NAME} ${Orocos-KDL_LIBRARIES})
 
 add_subdirectory(test)
