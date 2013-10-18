@@ -131,10 +131,10 @@ TEST_F(KDLPluginTest,writeProperties)
     rotation_prop.value()=rotation;
     jntarray_prop.value()=jntarray;
     
-    EXPECT_TRUE(marsh->storeProperties("test/test.cpf"));
-    EXPECT_TRUE(marsh->writeProperties("test/test1.cpf"));
-    EXPECT_TRUE(marsh->updateFile("test/test1.cpf"));
-    EXPECT_TRUE(marsh->readProperties("test/test.cpf"));
+    EXPECT_TRUE(marsh->storeProperties("test.cpf"));
+    EXPECT_TRUE(marsh->writeProperties("test1.cpf"));
+    EXPECT_TRUE(marsh->updateFile("test1.cpf"));
+    EXPECT_TRUE(marsh->readProperties("test.cpf"));
 
     EXPECT_EQ(frame_prop.value(),frame);
     EXPECT_EQ(twist_prop.value(),twist);
