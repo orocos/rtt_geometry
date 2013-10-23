@@ -23,26 +23,22 @@
 #ifndef ORO_KDL_CORBATOOLKIT_HPP
 #define ORO_KDL_CORBATOOLKIT_HPP 1
 
-#include <string>
-#include <rtt/TransportPlugin.hpp>
-#include <rtt/Plugin.hpp>
+#include <rtt/types/TransportPlugin.hpp>
 
 namespace KDL
 {
     namespace Corba
     {
-    class CorbaKDLPlugin : public RTT::TransportPlugin
+      struct CorbaKDLPlugin : public RTT::types::TransportPlugin
         {
-        public:
-            bool registerTransport(std::string name, RTT::TypeInfo* ti);
+	  bool registerTransport(std::string name, RTT::types::TypeInfo* ti);
 
             std::string getTransportName() const;
 
             std::string getName() const;
-
+	  
+	    std::string getTypekitName() const;
         };
-
-        extern CorbaKDLPlugin   corbaKDLPlugin;
 
     }
 

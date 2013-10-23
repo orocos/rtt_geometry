@@ -46,5 +46,6 @@ orocos_typekit(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${Orocos-KDL_LIBRARIES})
 
 add_subdirectory(test)
+add_subdirectory(src/corba)
 
 orocos_generate_package()

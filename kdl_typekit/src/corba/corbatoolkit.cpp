@@ -20,25 +20,22 @@
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "corbatoolkit.hpp"
-#include "../toolkit.hpp"
-#include <rtt/Types.hpp>
-#include <rtt/Toolkit.hpp>
-#include <rtt/corba/CorbaTemplateProtocol.hpp>
+#include <rtt/types/Types.hpp>
+#include <rtt/transports/corba/CorbaTemplateProtocol.hpp>
 #include "CorbaKDLConversion.hpp"
+#include <rtt/types/TypekitPlugin.hpp>
 
 using namespace RTT;
-using namespace RTT::detail;
+using namespace RTT::types;
+using namespace RTT::corba;
 
 namespace KDL
 {
     namespace Corba
     {
 
-        CorbaKDLPlugin  corbaKDLPlugin;
-    
             bool CorbaKDLPlugin::registerTransport(std::string name, TypeInfo* ti)
             {
-                assert( name == ti->getTypeName() );
                 if ( name == "vector" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Vector >() );
                 if ( name == "rotation" )
@@ -55,13 +52,14 @@ namespace KDL
             std::string CorbaKDLPlugin::getTransportName() const {
                 return "CORBA";
             }
-
-            std::string CorbaKDLPlugin::getName() const {
-                return "CorbaKDL";
+            std::string CorbaKDLPlugin::getTypekitName() const {
+                return "KDL";
             }
 
-
-    };
+            std::string CorbaKDLPlugin::getName() const {
+                return "kdl-corba-types";
+            }
+    }
 }
 
-ORO_TOOLKIT_PLUGIN(KDL::Corba::corbaKDLPlugin);
+ORO_TYPEKIT_PLUGIN( KDL::Corba::CorbaKDLPlugin)
