@@ -45,6 +45,8 @@ orocos_typekit(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} ${Orocos-KDL_LIBRARIES})
 
-add_subdirectory(test)
+if(CATKIN_ENABLE_TESTING)
+  add_subdirectory(test)
+endif()
 
 orocos_generate_package()
