@@ -6,7 +6,7 @@ orocos_use_package(ocl-deployment)
 
 catkin_add_gtest(typekit_test typekit_test.cpp)
 target_link_libraries(typekit_test 
-  ${Orocos-KDL_LIBRARIES}
+  ${orocos_kdl_LIBRARIES}
   ${USE_OROCOS_LIBRARIES}
   ${OROCOS-RTT_RTT_LIBRARIES}
   ${OROCOS-RTT_RTT-MARSHALLING_LIBRARY} 
