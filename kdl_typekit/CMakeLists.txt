@@ -5,8 +5,6 @@ project(kdl_typekit)
 
 find_package(catkin)
 
-catkin_package()
-
 # Defines the orocos_* cmake macros. See that file for additional
 # documentation.
 find_package(OROCOS-RTT REQUIRED)

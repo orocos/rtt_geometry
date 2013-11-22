@@ -3,8 +3,6 @@ project(eigen_typekit)
 
 find_package(catkin REQUIRED)
 
-catkin_package(DEPENDS rtt)
-
 find_package(Eigen REQUIRED)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake )
