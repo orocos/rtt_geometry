@@ -5,8 +5,6 @@ project(kdl_typekit)
 
 find_package(catkin)
 
-catkin_package()
-
 # Defines the orocos_* cmake macros. See that file for additional
 # documentation.
 find_package(OROCOS-RTT REQUIRED)
@@ -47,4 +45,7 @@ if(CATKIN_ENABLE_TESTING)
 endif()
 add_subdirectory(src/corba)
 
-orocos_generate_package()
+orocos_generate_package(
+  DEPENDS orocos_kdl
+  DEPENDS_TARGETS rtt_roscomm rtt_std_msgs
+)
