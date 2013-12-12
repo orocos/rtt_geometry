@@ -40,10 +40,11 @@ orocos_typekit(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
 
+add_subdirectory(src/corba)
+
 if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
 endif()
-add_subdirectory(src/corba)
 
 orocos_generate_package(
   DEPENDS orocos_kdl

@@ -12,3 +12,4 @@ target_link_libraries(typekit_test
   ${OROCOS-RTT_RTT-MARSHALLING_LIBRARY} 
   pthread)
 
+orocos_component(kdltypekit-testcomponent testcomponent.cpp)
