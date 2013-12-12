@@ -36,15 +36,15 @@ namespace KDL
 
             bool CorbaKDLPlugin::registerTransport(std::string name, TypeInfo* ti)
             {
-                if ( name == "vector" )
+                if ( name == "KDL.Vector" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Vector >() );
-                if ( name == "rotation" )
+                if ( name == "KDL.Rotation" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Rotation >() );
-                if ( name == "frame" )
+                if ( name == "KDL.Frame" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Frame >() );
-                if ( name == "wrench" )
+                if ( name == "KDL.Wrench" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Wrench >() );
-                if ( name == "twist" )
+                if ( name == "KDL.Twist" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Twist >() );
                 return false;
             }
