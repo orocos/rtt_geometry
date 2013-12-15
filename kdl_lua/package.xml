@@ -1,6 +1,6 @@
 <package>
   <name>kdl_lua</name>
-  <version>0.4.0</version>
+  <version>2.7.0</version>
   <description>kdl_lua, contains the kdl pretty printing lua module kdlpp.lua</description>
   <maintainer email="first.last@mech.kuleuven.be">Nick Vanthienen</maintainer>
   <maintainer email="first.last@mech.kuleuven.be">Markus Klotzbucher</maintainer>
