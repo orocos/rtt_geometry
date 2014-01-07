@@ -17,19 +17,16 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <!-- Dependencies needed to compile this package. -->
-  <build_depend>ocl</build_depend>
-  <build_depend>kdl_typekit</build_depend>
-  <build_depend>rtt_kdl_conversions</build_depend>
+  <build_depend>rtt</build_depend>
 
   <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>rtt</run_depend>
   <run_depend>ocl</run_depend>
   <run_depend>kdl_typekit</run_depend>
-  <run_depend>rtt_kdl_conversions</run_depend>
 
   <!-- Dependencies needed only for running tests. -->
   <!-- <test_depend>ocl</test_depend> -->
   <!-- <test_depend>kdl_typekit</test_depend> -->
-  <!-- <test_depend>rtt_kdl_conversions</test_depend> -->
 
   <export>
 

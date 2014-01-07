@@ -7,5 +7,5 @@ find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake )
 
 orocos_generate_package(
-  DEPENDS_TARGETS ocl kdl_typekit rtt_kdl_conversions
+  DEPENDS_TARGETS ocl kdl_typekit 
 )
