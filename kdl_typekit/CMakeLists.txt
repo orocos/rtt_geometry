@@ -7,9 +7,9 @@ project(kdl_typekit)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 
-find_package(orocos_kdl REQUIRED)
-include_directories(${orocos_kdl_INCLUDE_DIRS})
-link_directories(${orocos_kdl_LIBRARY_DIRS})
+find_package(Orocos-KDL REQUIRED)
+include_directories(${Orocos-KDL_INCLUDE_DIRS})
+link_directories(${Orocos-KDL_LIBRARY_DIRS})
 
 # Define the way rotation properties get written to XML
 # Set one of the two options below to write them as EULER ZYX or RPY
@@ -35,7 +35,7 @@ orocos_typekit(${PROJECT_NAME}
   src/kinfamproperties.cpp
   )
 
-target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Orocos-KDL_LIBRARIES})
 
 if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
@@ -43,6 +43,5 @@ endif()
 add_subdirectory(src/corba)
 
 orocos_generate_package(
-  DEPENDS orocos_kdl
-  DEPENDS_TARGETS rtt_roscomm rtt_std_msgs
+  DEPENDS kdl
 )
