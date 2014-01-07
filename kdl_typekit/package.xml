@@ -15,14 +15,14 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <!-- Dependencies needed to compile this pacakge. -->
+  <build_depend>kdl</build_depend>
   <build_depend>rtt</build_depend>
   <build_depend>ocl</build_depend>
-  <build_depend>orocos_kdl</build_depend>
 
   <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>kdl</run_depend>
   <run_depend>rtt</run_depend>
   <run_depend>ocl</run_depend>
-  <run_depend>orocos_kdl</run_depend>
 
   <!-- Dependencies needed only for running tests. -->
   <!-- <test_depend>rtt</test_depend> -->
