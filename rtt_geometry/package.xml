@@ -1,0 +1,23 @@
+<package>
+  <name>rtt_geometry</name>
+  <version>2.7.0</version>
+  <description>
+    This metapackage contains tools for integrating the Orocos Kinematics and
+    Dynamics Library (KDL) with the Orocos Toolchain and Real-Time Toolkit
+    (RTT).
+  </description>
+  <maintainer email="orocos-dev@lists.mech.kuleuven.be">Orocos Developers</maintainer>
+  <url type="website">http://www.orocos.org/</url>
+  <license>LGPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>kdl_typekit</run_depend>
+  <run_depend>eigen_typekit</run_depend>
+  <run_depend>kdl_lua</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+
+</package>
