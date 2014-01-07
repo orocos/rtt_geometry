@@ -30,6 +30,7 @@
   <!-- <test_depend>orocos_kdl</test_depend> -->
 
   <export>
-
+    <build_type>cmake</build_type>
   </export>
+
 </package>
