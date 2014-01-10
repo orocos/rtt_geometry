@@ -46,6 +46,4 @@ endif()
 add_subdirectory(src/corba)
 
 orocos_generate_package(
-  DEPENDS orocos_kdl
-  DEPENDS_TARGETS rtt_roscomm rtt_std_msgs
 )
