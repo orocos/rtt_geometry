@@ -46,5 +46,5 @@ endif()
 add_subdirectory(src/corba)
 
 orocos_generate_package(
-  orocos-kdl
+  DEPENDS orocos-kdl
 )
