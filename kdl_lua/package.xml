@@ -28,8 +28,4 @@
   <!-- <test_depend>ocl</test_depend> -->
   <!-- <test_depend>kdl_typekit</test_depend> -->
 
-  <export>
-    <build_type>cmake</build_type>
-  </export>
-
 </package>
