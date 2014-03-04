@@ -91,20 +91,35 @@ public:
 
     void updateHook()
     {
-        if(port_vector_in.read(prop_vector)==NewData)
+        KDL::Vector tmp_vector;
+        if(port_vector_in.read(tmp_vector)==NewData){
             port_vector_out.write(prop_vector);
+            prop_vector = tmp_vector;
+        }
 
-        if(port_rotation_in.read(prop_rotation)==NewData)
+        KDL::Rotation tmp_rotation;
+        if(port_rotation_in.read(tmp_rotation)==NewData){
             port_rotation_out.write(prop_rotation);
+            prop_rotation = tmp_rotation;
+        }
 
-        if(port_frame_in.read(prop_frame)==NewData)
+        KDL::Frame tmp_frame;
+        if(port_frame_in.read(tmp_frame)==NewData){
             port_frame_out.write(prop_frame);
+            prop_frame = tmp_frame;
+        }
 
-        if(port_wrench_in.read(prop_wrench)==NewData)
+        KDL::Wrench tmp_wrench;
+        if(port_wrench_in.read(tmp_wrench)==NewData){
             port_wrench_out.write(prop_wrench);
+            prop_wrench = tmp_wrench;
+        }
 
-        if(port_twist_in.read(prop_twist)==NewData)
+        KDL::Twist tmp_twist;
+        if(port_twist_in.read(tmp_twist)==NewData){
             port_twist_out.write(prop_twist);
+            prop_twist = tmp_twist;
+        }
 
         return;
     }
