@@ -28,8 +28,4 @@
   <!-- <test_depend>rtt</test_depend> -->
   <!-- <test_depend>ocl</test_depend> -->
   <!-- <test_depend>orocos_kdl</test_depend> -->
-
-  <export>
-
-  </export>
 </package>

@@ -28,7 +28,4 @@
   <!-- <test_depend>ocl</test_depend> -->
   <!-- <test_depend>kdl_typekit</test_depend> -->
 
-  <export>
-
-  </export>
 </package>
