@@ -43,6 +43,19 @@ if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
 endif()
 
+file(GLOB LUA_FILES "lua/*.lua")
+set(LUA_DESTINATION share)
+if(catkin_FOUND)
+  catkin_add_env_hooks(10.${PROJECT_NAME} SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
+  set(LUA_DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION})
+endif()
+
+install(
+  FILES ${LUA_FILES}
+  DESTINATION ${LUA_DESTINATION}/lua/5.1/${PROJECT_NAME}/
+)
+
+
 orocos_generate_package(
   DEPENDS orocos-kdl
 )

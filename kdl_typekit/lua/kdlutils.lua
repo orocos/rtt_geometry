@@ -2,6 +2,8 @@ local rttlib = require "rttlib"
 local rtt = rtt
 module("kdlutils")
 
+rtt.getTC():getPeer("Deployer"):import("kdl_typekit")
+
 function rotx(r)
    f = rtt.Variable("KDL.Frame")
    f.M=rtt.provides("KDL"):provides("Rotation"):RotX(r)
