@@ -14,7 +14,6 @@
 
   <run_depend>kdl_typekit</run_depend>
   <run_depend>eigen_typekit</run_depend>
-  <run_depend>kdl_lua</run_depend>
 
   <export>
     <metapackage/>
