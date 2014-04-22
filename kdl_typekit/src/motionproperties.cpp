@@ -301,7 +301,7 @@ namespace RTT
                         return true;
                     } else {
                         std::string element = !_a ? "alpha" : !_b ? "beta" : "gamma";
-                        Logger::log() << Logger::Error << "Aborting composition of (KDL.EulerZYX) Property< KDL.Rotation > "
+                        Logger::log() << Logger::Debug << "Aborting composition of (KDL.EulerZYX) Property< KDL.Rotation > "
                                       << ": Missing element '" <<element<<"'." <<Logger::endl;
                         return false;
                     }
@@ -368,7 +368,7 @@ namespace RTT
                         return true;
                     } else {
                         std::string element = !_r ? "R" : !_p ? "P" : "Y";
-                        Logger::log() << Logger::Error << "Aborting composition of (KDL.RPY) Property< KDL.Rotation > "
+                        Logger::log() << Logger::Debug << "Aborting composition of (KDL.RPY) Property< KDL.Rotation > "
                                       << ": Missing element '" <<element<<"'." <<Logger::endl;
                         return false;
                     }
@@ -442,7 +442,7 @@ namespace RTT
                 Property<PropertyBag>* subbag = bag.getPropertyType<PropertyBag>("vel");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Twist > "
-                                  << ": Trans_Vel not found."
+                                  << ": vel not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -451,7 +451,7 @@ namespace RTT
                 subbag = bag.getPropertyType<PropertyBag>("rot");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Twist > "
-                                  << ": Rot_Vel not found."
+                                  << ": rot not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -487,7 +487,7 @@ namespace RTT
                 Property<PropertyBag>* subbag = bag.getPropertyType<PropertyBag>("force");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Wrench > "
-                                  << ": Force not found."
+                                  << ": force not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -496,7 +496,7 @@ namespace RTT
                 subbag = bag.getPropertyType<PropertyBag>("torque");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Wrench > "
-                                  << ": Torque not found."
+                                  << ": torque not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -540,7 +540,7 @@ namespace RTT
                 Property<PropertyBag>* subbag = f_bag.getPropertyType<PropertyBag>("p");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Frame > "
-                                  << ": Position not found."
+                                  << ": p not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -549,7 +549,7 @@ namespace RTT
                 subbag = f_bag.getPropertyType<PropertyBag>("M");
                 if (! subbag ) {
                     Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Frame > "
-                                  << ": Rotation not found."
+                                  << ": M not found."
                                   <<Logger::endl;
                     return false;
                 }
@@ -560,7 +560,7 @@ namespace RTT
                 if (!result )
                     {
                         Logger::log() << Logger::Error << "Aborting composition of Property< KDL.Frame > "
-                                      << ": element 'Position' has wrong format." <<Logger::endl;
+                                      << ": element 'p' has wrong format." <<Logger::endl;
                         return false;
                     }
                 result = vas_rpy.getResult( f.M) ||
@@ -570,7 +570,7 @@ namespace RTT
                     {
                         Logger::log()
                             << Logger::Error << "Aborting composition of Property< KDL.Frame > "
-                            << ": Could not compose 'Rotation' type 'KDL.Rotation','KDL.EulerZYX' or 'KDL.RPY', got type '"
+                            << ": Could not compose 'M' type 'KDL.Rotation', got type '"
                             << subbag->get().getType() <<"'."<<Logger::endl;
                         return false;
                     }
