@@ -41,5 +41,7 @@ if(OROCOS-RTT_CORBA_FOUND)
   orocos_typekit(kdl-transport-corba SHARED ${CPPS})
   # Is used for building  the library
   TARGET_LINK_LIBRARIES(kdl-transport-corba ${OROCOS-RTT_CORBA_LIBRARIES})
+  
+  install(FILES ${HPPS} DESTINATION include/orocos/kdl_typekit/transports/corba)
 
 endif()
