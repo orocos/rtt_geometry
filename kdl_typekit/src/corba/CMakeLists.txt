@@ -42,6 +42,6 @@ if(OROCOS-RTT_CORBA_FOUND)
   # Is used for building  the library
   TARGET_LINK_LIBRARIES(kdl-transport-corba ${OROCOS-RTT_CORBA_LIBRARIES})
   
-  install(FILES ${HPPS} DESTINATION include/orocos/kdl_typekit/transports/corba)
+  install(FILES ${HPPS} ${IDLS} DESTINATION include/orocos/kdl_typekit/transports/corba)
 
 endif()
