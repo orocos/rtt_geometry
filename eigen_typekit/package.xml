@@ -3,7 +3,8 @@
   <version>2.7.0</version>
   <license>LGPL</license>
   <description>An Orocos typekit for Eigen types.</description>
-  <maintainer email="orocos-dev@lists.mech.kuleuven.be">Orocos Development Team</maintainer>
+  <maintainer email="orocos-dev@lists.mech.kuleuven.be">Orocos Developers</maintainer>
+
   <author>Ruben Smits</author>
 
   <buildtool_depend>catkin</buildtool_depend>
