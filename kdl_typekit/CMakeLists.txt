@@ -51,6 +51,11 @@ if(catkin_FOUND)
 endif()
 
 install(
+  FILES src/kdlTypekitTypes.hpp
+  DESTINATION include/orocos/kdl_typekit/typekit
+  RENAME Types.hpp
+)
+install(
   FILES ${LUA_FILES}
   DESTINATION ${LUA_DESTINATION}/lua/5.1/${PROJECT_NAME}/
 )
