@@ -10,7 +10,6 @@
 #include <kdl/jntarray.hpp>
 
 
-
 // This is a hack. We include it unconditionally as it may be required by some
 // typekits *and* it is a standard header. Ideally, we would actually check if
 // some of the types need std::vector.
@@ -29,10 +28,13 @@
     extern template class RTT::internal::ConstantDataSource< ::KDL::Frame >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Frame >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Frame >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Frame >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Frame >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Frame >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -67,10 +69,13 @@ a & make_nvp("M", b.M);
     extern template class RTT::internal::ConstantDataSource< ::KDL::Rotation >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Rotation >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Rotation >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Rotation >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Rotation >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Rotation >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -111,10 +116,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Twist >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Twist >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Twist >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Twist >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Twist >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Twist >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -150,10 +158,13 @@ a & make_nvp("rot", b.rot);
     extern template class RTT::internal::ConstantDataSource< ::KDL::Vector >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Vector >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Vector >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Vector >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Vector >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Vector >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -189,10 +200,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Wrench >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Wrench >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Wrench >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Wrench >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Wrench >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Wrench >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -226,10 +240,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Chain >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Chain >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Chain >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Chain >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Chain >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Chain >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -259,10 +276,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Joint >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Joint >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Joint >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Joint >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Joint >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Joint >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -292,10 +312,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Segment >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Segment >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Segment >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Segment >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Segment >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Segment >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -324,10 +347,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::Jacobian >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::Jacobian >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::Jacobian >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::Jacobian >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::Jacobian >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::Jacobian >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -357,10 +383,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< ::KDL::JntArray >;
     extern template class RTT::internal::ReferenceDataSource< ::KDL::JntArray >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< ::KDL::JntArray >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< ::KDL::JntArray >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< ::KDL::JntArray >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< ::KDL::JntArray >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -396,10 +425,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< std::vector<KDL::Rotation> >;
     extern template class RTT::internal::ReferenceDataSource< std::vector<KDL::Rotation> >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< std::vector<KDL::Rotation> >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< std::vector<KDL::Rotation> >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< std::vector<KDL::Rotation> >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< std::vector<KDL::Rotation> >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -433,10 +465,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< std::vector<KDL::Vector> >;
     extern template class RTT::internal::ReferenceDataSource< std::vector<KDL::Vector> >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< std::vector<KDL::Vector> >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< std::vector<KDL::Vector> >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< std::vector<KDL::Vector> >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< std::vector<KDL::Vector> >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -471,10 +506,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< std::vector<KDL::Frame> >;
     extern template class RTT::internal::ReferenceDataSource< std::vector<KDL::Frame> >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< std::vector<KDL::Frame> >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< std::vector<KDL::Frame> >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< std::vector<KDL::Frame> >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< std::vector<KDL::Frame> >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -509,10 +547,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< std::vector<KDL::Twist> >;
     extern template class RTT::internal::ReferenceDataSource< std::vector<KDL::Twist> >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< std::vector<KDL::Twist> >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< std::vector<KDL::Twist> >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< std::vector<KDL::Twist> >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< std::vector<KDL::Twist> >;
 #endif
 #ifdef ORO_PROPERTY_HPP
@@ -547,10 +588,13 @@ namespace boost
     extern template class RTT::internal::ConstantDataSource< std::vector<KDL::Wrench> >;
     extern template class RTT::internal::ReferenceDataSource< std::vector<KDL::Wrench> >;
 #endif
-#ifdef ORO_INPUT_PORT_HPP
-    extern template class RTT::OutputPort< std::vector<KDL::Wrench> >;
+#ifdef ORO_CHANNEL_ELEMENT_HPP
+    extern template class RTT::base::ChannelElement< std::vector<KDL::Wrench> >;
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
+    extern template class RTT::OutputPort< std::vector<KDL::Wrench> >;
+#endif
+#ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< std::vector<KDL::Wrench> >;
 #endif
 #ifdef ORO_PROPERTY_HPP
