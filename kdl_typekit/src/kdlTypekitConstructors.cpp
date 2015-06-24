@@ -168,12 +168,19 @@ namespace KDL{
           return rot.Inverse();
       }
   };
+
+    Rotation rotationAngleAxis( const Vector& axis, double angle )
+    {
+        return Rotation::Rot(axis, angle);
+    };
+
     bool KDLTypekitPlugin::loadConstructors()
     {
         TypeInfoRepository::shared_ptr ti = TypeInfoRepository::Instance();
 
         ti->type("KDL.Vector")->addConstructor( newConstructor(&vectorxyz) );
         ti->type("KDL.Rotation")->addConstructor( newConstructor( ptr_fun( Rotation::RPY )) );
+        ti->type("KDL.Rotation")->addConstructor( newConstructor(&rotationAngleAxis) );
         ti->type("KDL.Frame")->addConstructor( newConstructor(&framerv) );
         ti->type("KDL.Frame")->addConstructor( newConstructor(&framevr) );
         ti->type("KDL.Wrench")->addConstructor( newConstructor(&wrenchft) );
