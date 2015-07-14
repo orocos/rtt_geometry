@@ -5,7 +5,7 @@ namespace KDL{
   using namespace RTT;
 
   void loadTwistTypes(){
-    RTT::types::Types()->addType( new KDLTypeInfo<Twist>("KDL.Twist") );
+    RTT::types::Types()->addType( new KDLVectorTypeInfo<Twist,6>("KDL.Twist") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Twist > >("KDL.Twist[]") );
   };
 }  

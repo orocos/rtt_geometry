@@ -72,6 +72,38 @@ namespace KDL
   using namespace std;
 
   /**
+   * Helper functions.
+   */
+  /**
+   * Returns a reference to one item in an KDL container.
+   * @param cont The container to access
+   * @param index The item to reference
+   * @return A reference to item \a index
+   */
+  template<class KDLType, int size>
+  double& get_container_item(KDLType & cont, int index)
+  {
+      if (index >= size || index < 0)
+          return internal::NA<double&>::na();
+      return cont[index];
+  };
+
+  /**
+   * Returns a copy to one item in an STL container.
+   * @note vector<bool> is not supported, since it's not an STL container.
+   * @param cont The container to access
+   * @param index The item to extract from the sequence
+   * @return A copy of item \a index
+   */
+  template<class KDLType, int size>
+  double get_container_item_copy(const KDLType & cont, int index)
+  {
+      if (index >= size || index < 0)
+          return internal::NA<double>::na();
+      return cont[index];
+  };
+
+  /**
    * KDL RTT bindings
    */
   class KDLTypekitPlugin
@@ -86,13 +118,13 @@ namespace KDL
   };
 
   /**
-   * Temlate class used for Frame, Rotation, Vector, Twist and Wrench
+   * Temlate class used for Vector, Twist and Wrench
    */
-  template<class KDLType>
-  struct KDLTypeInfo
+  template<class KDLType, int size>
+  struct KDLVectorTypeInfo
     : public StructTypeInfo<KDLType,true>
   {
-    KDLTypeInfo(std::string name) : StructTypeInfo<KDLType,true>(name) {}
+      KDLVectorTypeInfo(std::string name) : StructTypeInfo<KDLType,true>(name) {}
     
     virtual bool decomposeTypeImpl(const KDLType& source, PropertyBag& targetbag ) const {
       decomposeProperty( source, targetbag );
@@ -102,7 +134,47 @@ namespace KDL
     virtual bool composeTypeImpl(const PropertyBag& source, KDLType& result) const {
       return composeProperty( source, result );
     }
+
+    base::DataSourceBase::shared_ptr getMember(base::DataSourceBase::shared_ptr item,
+            base::DataSourceBase::shared_ptr id) const {
+        // discover if user gave us a part name or index:
+        typename internal::DataSource<int>::shared_ptr id_indx = internal::DataSource<int>::narrow( internal::DataSourceTypeInfo<int>::getTypeInfo()->convert(id).get() );
+        if ( id_indx ) {
+            try {
+                if ( item->isAssignable() )
+                    return internal::newFunctorDataSource(&get_container_item<KDLType,size>, internal::GenerateDataSource()(item.get(), id_indx.get() ) );
+                else
+                    return internal::newFunctorDataSource(&get_container_item_copy<KDLType,size>, internal::GenerateDataSource()(item.get(), id_indx.get() ) );
+            } catch(...) {}
+        }
+        if (id_indx) {
+            log(Error) << "KDLVectorTypeInfo: Invalid index : " << id_indx->get() <<":"<< id_indx->getTypeName() << endlog();
+        }
+        if ( ! id_indx)
+            log(Error) << "KDLVectorTypeInfo: Not a member or index : " << id <<":"<< id->getTypeName() << endlog();
+        return base::DataSourceBase::shared_ptr();
+    }
   };
+
+  /**
+     * Template class used for Frame, Rotation
+     */
+    template<class KDLType>
+    struct KDLTypeInfo
+      : public StructTypeInfo<KDLType,true>
+    {
+      KDLTypeInfo(std::string name) : StructTypeInfo<KDLType,true>(name) {}
+
+      virtual bool decomposeTypeImpl(const KDLType& source, PropertyBag& targetbag ) const {
+        decomposeProperty( source, targetbag );
+        return true;
+      }
+
+      virtual bool composeTypeImpl(const PropertyBag& source, KDLType& result) const {
+        return composeProperty( source, result );
+      }
+
+    };
 
   /**
    * The single global instance of the KDL Typekit.

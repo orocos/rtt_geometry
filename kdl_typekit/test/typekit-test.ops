@@ -1,0 +1,42 @@
+program vector_test {
+ var KDL.Vector v1;
+ var KDL.Vector v2;
+ var KDL.Vector v3;
+ 
+ //Test accessors
+ v1.X = 1.
+ v1.Y = 2.
+ v1.Z = 3.
+ v2[0] = 10.
+ v2[1] = 20.
+ v2[2] = 30.
+ if ( v1[0] != 1.) then throw()
+ if ( v1[1] != 2.) then throw()
+ if ( v1[2] != 3.) then throw()
+ if ( v1[3] != 0.) then throw()
+ if ( v1[-1] != 0.) then throw()
+ 
+ if ( v2.X != 10.) then throw()
+ if ( v2.Y != 20.) then throw()
+ if ( v2.Z != 30.) then throw()
+ 
+ //Test operations
+ v3 = v2 + v1
+ if ( v3 != v2 + v1) then throw()
+ if ( v2 == v3 ) then throw()
+ v3 = v2 - v1
+ if ( v3 != v2 - v1) then throw()
+ v3 = v1 * 2
+ if ( v3[0] != v1[0] * 2) then throw()
+ if ( v3[1] != v1[1] * 2) then throw()
+ if ( v3[2] != v1[2] * 2) then throw()
+ v3 = v1 / 2
+ if ( v3[0] != v1[0] / 2) then throw()
+ if ( v3[1] != v1[1] / 2) then throw()
+ if ( v3[2] != v1[2] / 2) then throw()
+ 
+}
+
+program rotation_test {
+ var KDL.Rotation r;
+ }
