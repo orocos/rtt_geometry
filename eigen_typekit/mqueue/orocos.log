@@ -1,0 +1,103 @@
+0.000 [ Info   ][Logger] No ORO_LOGLEVEL environment variable set.
+0.000 [ Info   ][Logger]  OROCOS version '2.8.1' compiled with GCC 4.8.4. Running in GNU/Linux.
+0.000 [ Info   ][Logger] Orocos Logging Activated at level : [ Warning] ( 4 ) 
+0.000 [ Info   ][Logger] Reference System Time is : 1450283683077704345 ticks ( 1.45028e+09 seconds ).
+0.000 [ Info   ][Logger] Logging is relative to this time.
+0.000 [ Info   ][Logger] RTT_COMPONENT_PATH was set to: /home/hoarau/ros_ws/ext_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_ws/devel/lib/orocos:/opt/ros/indigo/lib/orocos . Searching in: /home/hoarau/ros_ws/ext_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_ws/devel/lib/orocos:/opt/ros/indigo/lib/orocos
+0.000 [ Info   ][Logger] plugin 'rtt' not loaded before.
+0.001 [ Info   ][Logger] Loading plugin libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/./plugins ...
+0.001 [ Info   ][Logger] Loaded RTT Service 'scripting' from 'rtt-scripting'
+0.001 [ Info   ][Logger] Loaded RTT Service 'marshalling' from 'rtt-marshalling'
+0.001 [ Info   ][Logger] typekit 'rtt' not loaded before.
+0.001 [ Info   ][Logger] Loading typekit libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/./types ...
+0.003 [ Info   ][TypekitRepository::Import] Loading Transport mqueue://rtt-types.
+0.003 [ Info   ][Logger] Loaded RTT TypeKit/Transport 'rtt-mqueue-transport' from 'rtt-transport-mqueue'
+0.021 [ Info   ][TypekitRepository::Import] Loading Transport CORBA://rtt-types.
+0.022 [ Info   ][Logger] Loaded RTT TypeKit/Transport 'rtt-corba-types' from 'rtt-transport-corba'
+0.042 [ Info   ][TypekitRepository::Import] Loading Typekit rtt-types.
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for int
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for int
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for uint
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for uint
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for double
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for double
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for float
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for float
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for char
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for char
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for bool
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for bool
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for void
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for ConnPolicy
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for TaskContext
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for string
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'mqueue' transport for array
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for array
+0.042 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for rt_string
+0.042 [ Info   ][Logger] Loaded RTT TypeKit/Transport 'rtt-types' from 'rtt-typekit'
+0.042 [ Info   ][Logger] RTT_COMPONENT_PATH was set to: /home/hoarau/ros_ws/ext_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_ws/devel/lib/orocos:/opt/ros/indigo/lib/orocos . Searching in: /home/hoarau/ros_ws/ext_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_ws/devel/lib/orocos:/opt/ros/indigo/lib/orocos
+0.042 [ Info   ][Logger] OCL factory set for real-time logging
+0.042 [ Info   ][Thread] Creating Thread for scheduler=ORO_SCHED_OTHER, priority=1, CPU affinity=0, with name='Deployer'
+0.042 [ Info   ][Deployer] Thread created with scheduler type 'ORO_SCHED_OTHER', priority 0, cpu affinity 255 and period 0 (PID= 19418 ).
+0.043 [ Info   ][Logger] No site file was found. Importing 'ocl' by default.
+0.043 [ Info   ][ComponentLoader::import(path_list)] Importing directory /opt/ros/indigo/lib/orocos/gnulinux/ocl ...
+0.045 [ Info   ][ComponentLoader::import(path_list)] Loaded multi component library '/opt/ros/indigo/lib/orocos/gnulinux/ocl/liborocos-ocl-reporting-gnulinux.so'
+0.046 [ Info   ][ComponentLoader::import(path_list)] Loaded multi component library '/opt/ros/indigo/lib/orocos/gnulinux/ocl/liborocos-ocl-common-gnulinux.so'
+0.058 [ Info   ][ComponentLoader::import(path_list)] Loaded multi component library '/opt/ros/indigo/lib/orocos/gnulinux/ocl/liborocos-ocl-reporting-netcdf-gnulinux.so'
+0.058 [ Info   ][ComponentLoader::import(path_list)] Loaded component type 'OCL::NetcdfReporting'
+0.061 [ Info   ][ComponentLoader::import(path_list)] Loaded multi component library '/opt/ros/indigo/lib/orocos/gnulinux/ocl/liborocos-ocl-timer-gnulinux.so'
+0.063 [ Info   ][ComponentLoader::import(path_list)] Loaded component type 'OCL::HelloWorld'
+0.064 [ Info   ][ComponentLoader::import(path_list)] Loaded multi component library '/opt/ros/indigo/lib/orocos/gnulinux/ocl/liborocos-ocl-logging-gnulinux.so'
+0.065 [ Info   ][ComponentLoader::import(path_list)] Loaded component type 'OCL::LuaComponent'
+0.065 [ Info   ][ComponentLoader::import(path_list)] Loaded component type 'OCL::LuaTLSFComponent'
+0.066 [ Info   ][ComponentLoader::import(path_list)] Loading typekit libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/ocl/types ...
+0.068 [ Info   ][TypekitRepository::Import] Loading Typekit OCLTypekit.
+0.068 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT TypeKit/Transport 'OCLTypekit' from 'ocl'
+0.068 [ Info   ][ComponentLoader::import(path_list)] Loading plugin libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/ocl/plugins ...
+0.069 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT Service 'Lua' from 'rttlua-plugin'
+0.070 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT Service 'print' from 'print'
+0.070 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT Service 'LuaTLSF' from 'rttlua-tlsf-plugin'
+0.072 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT Service 'os' from 'os'
+0.072 [ Info   ][Thread] Creating Thread for scheduler=ORO_SCHED_OTHER, priority=1, CPU affinity=0, with name='TaskBrowser'
+0.072 [ Info   ][TaskBrowser] Thread created with scheduler type 'ORO_SCHED_OTHER', priority 0, cpu affinity 255 and period 0 (PID= 19419 ).
+0.072 [ Info   ][Logger] Entering Task Deployer
+3.680 [ Info   ][Thread] Creating Thread for scheduler=ORO_SCHED_OTHER, priority=1, CPU affinity=0, with name='GlobalEngine'
+3.681 [ Info   ][GlobalEngine] Thread created with scheduler type 'ORO_SCHED_OTHER', priority 0, cpu affinity 255 and period 0 (PID= 19420 ).
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)] No such package or directory found in search path: eigen-transport-mqueue. Search path is: /home/hoarau/ros_ws/ext_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos:/home/hoarau/ros_ws/lwr_ws/devel/lib/orocos:/opt/ros/indigo/lib/orocos:.
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)] Directories searched include the following: 
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/gnulinux/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/lwr_controllers_ws/devel/lib/orocos/gnulinux/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/lwr_ws/devel/lib/orocos/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /home/hoarau/ros_ws/lwr_ws/devel/lib/orocos/gnulinux/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /opt/ros/indigo/lib/orocos/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - /opt/ros/indigo/lib/orocos/gnulinux/eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - ./eigen-transport-mqueue
+3.682 [ ERROR  ][ComponentLoader::importInstalledPackage(package, path_list)]  - ./gnulinux/eigen-transport-mqueue
+11.929 [ Info   ][ComponentLoader::import(path_list)] Importing directory /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/gnulinux/eigen_typekit ...
+11.930 [ Info   ][ComponentLoader::import(path_list)] Loading typekit libraries from directory /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/gnulinux/eigen_typekit/types ...
+11.947 [ Info   ][TypekitRepository::Import] Loading Typekit Eigen.
+11.948 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT TypeKit/Transport 'Eigen' from 'eigen_typekit'
+11.948 [ Info   ][ComponentLoader::import(path_list)] Importing directory /opt/ros/indigo/lib/orocos/gnulinux/eigen_typekit ...
+11.948 [ Info   ][ComponentLoader::import(path_list)] Loading typekit libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/eigen_typekit/types ...
+32.233 [ Info   ][ComponentLoader::import(path_list)] Importing directory /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/gnulinux/kdl_typekit ...
+32.266 [ Info   ][ComponentLoader::import(path_list)] Loaded component type 'KDLTypekitTestComponent'
+32.266 [ Info   ][ComponentLoader::import(path_list)] Loading typekit libraries from directory /home/hoarau/ros_ws/ext_ws/devel/lib/orocos/gnulinux/kdl_typekit/types ...
+32.269 [ Info   ][TypekitRepository::Import] Loading Transport CORBA://KDL.
+32.269 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT TypeKit/Transport 'kdl-corba-types' from 'kdl-transport-corba'
+32.374 [ Info   ][TypekitRepository::Import] Loading Typekit KDL.
+32.374 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for KDL.Frame
+32.374 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for KDL.Rotation
+32.374 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for KDL.Twist
+32.374 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for KDL.Vector
+32.374 [ Info   ][TypekitRepository::Import] Registered new 'CORBA' transport for KDL.Wrench
+32.375 [ Info   ][ComponentLoader::import(path_list)] Loaded RTT TypeKit/Transport 'KDL' from 'kdl_typekit'
+32.375 [ Info   ][ComponentLoader::import(path_list)] Importing directory /opt/ros/indigo/lib/orocos/gnulinux/kdl_typekit ...
+32.375 [ Info   ][ComponentLoader::import(path_list)] Loading typekit libraries from directory /opt/ros/indigo/lib/orocos/gnulinux/kdl_typekit/types ...
+37.400 [ Info   ][Logger] Ignoring deployment shutdown function due to missing peer.
+37.401 [ Info   ][stopComponentsGroup] Stopping group 0
+37.401 [ Info   ][cleanupComponentsGroup] Cleaning up group 0
+37.401 [ Info   ][Logger] Unloading group 0
+37.401 [ Info   ][Logger] Kick-out of group 0 successful.
+37.405 [ Info   ][Logger] Orocos Logging Deactivated.
