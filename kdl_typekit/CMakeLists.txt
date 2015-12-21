@@ -38,6 +38,7 @@ orocos_typekit(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${orocos_kdl_LIBRARIES})
 
 add_subdirectory(src/corba)
+add_subdirectory(src/mqueue)
 
 if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
