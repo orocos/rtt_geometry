@@ -7,7 +7,12 @@ if(OROCOS-RTT_CORBA_FOUND)
   include( ${OROCOS-RTT_USE_FILE} )
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/config)
   set(ENABLE_CORBA TRUE)
-  find_package(Corba)
+  find_package(Corba REQUIRED)
+
+  # for jacobian and jntarray
+  find_package(cmake_modules REQUIRED)
+  find_package(Eigen REQUIRED)
+  include_directories(${Eigen_INCLUDE_DIRS})
   # Add includes / lib paths if necessary
 #  IF( NOT ${ACE_DIR} STREQUAL /usr/include )
 #    SET(CMAKE_C_FLAGS_RTT "${CMAKE_C_FLAGS_RTT} -I${ACE_DIR}" CACHE INTERNAL "")

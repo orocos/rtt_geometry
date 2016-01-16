@@ -1,6 +1,9 @@
 #include "KDLTypesC.h"
 #include <rtt/transports/corba/CorbaConversion.hpp>
 #include <kdl/frames.hpp>
+#include <kdl/jacobian.hpp>
+#include <kdl/jntarray.hpp>
+#include <Eigen/Dense>
 
 namespace RTT
 {
@@ -288,6 +291,121 @@ namespace RTT
 	    tp.rot.z(cb[5]);
             return true;
         }
+    };
+    template<>
+    struct AnyConversion< KDL::Jacobian >
+    {
+        typedef KDL::Corba::DoubleSequence CorbaType;
+        typedef KDL::Jacobian StdType;
+      static CorbaType* toAny(const StdType& tp) {
+        CorbaType* cb = new CorbaType();
+        toCorbaType(*cb, tp);
+        return cb;
+      }
+
+      static bool update(const CORBA::Any& any, StdType& _value) {
+        CorbaType* result;
+        if ( any >>= result ) {
+          return toStdType(_value, *result);
+        }
+        return false;
+      }
+
+      static CORBA::Any_ptr createAny( const StdType& t ) {
+        CORBA::Any_ptr ret = new CORBA::Any();
+        *ret <<= toAny( t );
+        return ret;
+      }
+
+      static bool updateAny( StdType const& t, CORBA::Any& any ) {
+        any <<= toAny( t );
+        return true;
+      }
+
+      static bool toCorbaType(CorbaType& cb, const StdType& tp){
+        //log(Debug)<< "Converting type 'KDL::Jacobian' (size 6*" << tp.columns () <<") to sequence<CORBA::Double> "<<cb.length() <<endlog();
+        
+        size_t rows = static_cast<size_t>(tp.data.rows());
+        size_t cols = static_cast<size_t>(tp.data.cols());
+
+        cb.length( (CORBA::ULong)(tp.data.size() + 2) );
+        //log(Debug)<< "Total size for vector out  "<<cb.length() <<endlog();
+
+        cb[0] = static_cast<double>(rows);
+        cb[1] = static_cast<double>(cols);
+        //log(Debug)<< tp.data <<endlog();
+        Eigen::Map<Eigen::MatrixXd>(cb.get_buffer(/*CORBA::Boolean(false)*/) + 2 , rows, cols) = tp.data;
+        for(int i=0;i<cb.length();i++)
+          //log(Debug) << cb[i] <<" ";
+        //log(Debug) <<endlog();
+        return true;
+      }
+
+      static bool toStdType(StdType& tp, const CorbaType& cb){
+        //log(Debug)<< "Converting type sequence<CORBA::Double> (size "<<cb.length()<<") to 'Eigen::MatrixXd' (size " << tp.data.rows()<<"x"<<tp.data.cols()<<")" <<endlog();
+        if(cb.length() < 2){
+          return false;
+        }
+
+        size_t rows = static_cast<size_t>(cb[0]);
+        size_t cols = static_cast<size_t>(cb[1]);
+
+        //log(Debug)<< "rows,cols : "<<rows<<" "          <<cols <<endlog();
+        tp.resize(cols);
+
+        tp.data = Eigen::MatrixXd::Map(cb.get_buffer()+2,rows,cols);
+        //log(Debug)<<"Final out : \n"<< tp.data <<endlog();
+        return true;
+      }
+
+    };
+
+    template<>
+    struct AnyConversion< KDL::JntArray >
+    {
+        typedef KDL::Corba::DoubleSequence CorbaType;
+        typedef KDL::JntArray StdType;
+
+      static CorbaType* toAny(const StdType& tp) {
+        CorbaType* cb = new CorbaType();
+        toCorbaType(*cb, tp);
+        return cb;
+      }
+
+      static bool update(const CORBA::Any& any, StdType& _value) {
+        CorbaType* result;
+        if ( any >>= result ) {
+          return toStdType(_value, *result);
+        }
+        return false;
+      }
+
+      static CORBA::Any_ptr createAny( const StdType& t ) {
+        CORBA::Any_ptr ret = new CORBA::Any();
+        *ret <<= toAny( t );
+        return ret;
+      }
+
+      static bool updateAny( StdType const& t, CORBA::Any& any ) {
+        any <<= toAny( t );
+        return true;
+      }
+
+      static bool toCorbaType(CorbaType& cb, const StdType& tp){
+        //log(Debug)<< "Converting type 'KDL::JntArray' (size "<<tp.rows()<<") to sequence<CORBA::Double> (size "<< cb.length()<<")"<<endlog();
+        cb.length( (CORBA::ULong)(tp.rows() ));
+        Eigen::Map<Eigen::VectorXd>(cb.get_buffer() , cb.length()) = tp.data;
+        //log(Debug)<< "DONE Converting type 'KDL::JntArray' (size "<<tp.rows()<<") to sequence<CORBA::Double> (size "<< cb.length()<<")"<<endlog();
+        return true;
+      }
+    
+      static bool toStdType(StdType& tp, const CorbaType& cb){
+        //log(Debug)<< "Converting type sequence<CORBA::Double> (size "<< cb.length()<<") to 'KDL::JntArray' (size "<<tp.rows()<<")" <<endlog();
+        tp.resize( cb.length() );
+        tp.data = Eigen::VectorXd::Map(cb.get_buffer() , cb.length());
+        //log(Debug)<< "DONE Converting type sequence<CORBA::Double> (size "<< cb.length()<<") to 'KDL::JntArray' (size "<<tp.rows()<<")" <<endlog();
+          return true;
+      }
     };
   };//namespace corba
 };//namespace RTT
