@@ -27,17 +27,17 @@
 
 namespace Eigen
 {
-    namespace Corba
+    namespace corba
     {
       struct CorbaEigenPlugin : public RTT::types::TransportPlugin
         {
-	  bool registerTransport(std::string name, RTT::types::TypeInfo* ti);
+          bool registerTransport(std::string name, RTT::types::TypeInfo* ti);
 
-            std::string getTransportName() const;
+          std::string getTransportName() const;
 
-            std::string getName() const;
-	  
-	    std::string getTypekitName() const;
+          std::string getName() const;
+
+          std::string getTypekitName() const;
         };
 
     }

@@ -31,7 +31,7 @@ using namespace RTT::corba;
 
 namespace Eigen
 {
-    namespace Corba
+    namespace corba
     {
 
             bool CorbaEigenPlugin::registerTransport(std::string name, TypeInfo* ti)
@@ -56,4 +56,4 @@ namespace Eigen
     }
 }
 
-ORO_TYPEKIT_PLUGIN( Eigen::Corba::CorbaEigenPlugin)
+ORO_TYPEKIT_PLUGIN( Eigen::corba::CorbaEigenPlugin)
