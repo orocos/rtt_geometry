@@ -42,7 +42,6 @@ namespace RTT
           //log(Debug)<< "Size of Vector is NULL"<< endlog();
           return true;
         }
-                AnyConversion<double>::toCorbaType(cb,1.);
         //log(Debug)<< "Converting type 'Eigen::VectorXd' (size "<<tp.size()<<") to sequence<CORBA::Double> (size "<< cb.length()<<")"<<endlog();
         cb.length( (CORBA::ULong)(tp.size()) );
         Eigen::Map<Eigen::VectorXd>(cb.get_buffer(/*CORBA::Boolean(false)*/) , cb.length()) = tp;
