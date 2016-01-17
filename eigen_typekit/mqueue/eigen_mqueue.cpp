@@ -34,7 +34,7 @@ namespace boost{
 
                 ar & rows;
                 ar & cols;
-                ar & boost::serialization::make_array(g.data(), rows * cols);
+                ar & boost::serialization::make_array(g.data(), g.size());
             }
 
         template<   class Archive, 
@@ -53,7 +53,7 @@ namespace boost{
             ar & rows;
             ar & cols;
             g.resize(rows, cols);
-            ar & boost::serialization::make_array(g.data(), rows * cols);
+            ar & boost::serialization::make_array(g.data(), g.size());
         }
 
         template<   class Archive, 
