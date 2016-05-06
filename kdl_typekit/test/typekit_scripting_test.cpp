@@ -36,14 +36,18 @@ protected:
 };
 
 TEST_F(KDLPluginScriptingTest, ScriptTest) {
-    RTT::scripting::ProgramInterfacePtr program = scripting->getProgram("vector_test");
-    ASSERT_TRUE(program) << "Failed to get program";
-    ASSERT_TRUE(program->start());
-    while(program->isRunning()) {;
-        ASSERT_FALSE(program->inError()) << "program failed on line " << program->getLineNumber();
-        usleep(1000);
+    std::vector<std::string> programs = scripting->getProgramList();
+
+    for(std::vector<std::string>::const_iterator it = programs.begin(); it != programs.end(); ++it) {
+        RTT::scripting::ProgramInterfacePtr program = scripting->getProgram(*it);
+        ASSERT_TRUE(program) << "Failed to get program " << *it;
+        ASSERT_TRUE(program->start());
+        while(program->isRunning()) {
+            ASSERT_FALSE(program->inError()) << "Program " << *it << " failed on line " << program->getLineNumber();
+            usleep(1000);
+        }
+        ASSERT_FALSE(program->inError()) << "Program " << *it << " failed on line " << program->getLineNumber();
     }
-    ASSERT_FALSE(program->inError()) << "Failed on line " << program->getLineNumber();
 }
 
 int ORO_main(int argc, char **argv){
