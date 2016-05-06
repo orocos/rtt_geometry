@@ -1,5 +1,17 @@
 #include "kdlTypekit.hpp"
 
+template class RTT::internal::DataSource< ::KDL::JntArray >;
+template class RTT::internal::AssignableDataSource< ::KDL::JntArray >;
+template class RTT::internal::ValueDataSource< ::KDL::JntArray >;
+template class RTT::internal::ConstantDataSource< ::KDL::JntArray >;
+template class RTT::internal::ReferenceDataSource< ::KDL::JntArray >;
+template class RTT::base::ChannelElement< ::KDL::JntArray >;
+template class RTT::OutputPort< ::KDL::JntArray >;
+template class RTT::InputPort< ::KDL::JntArray >;
+template class RTT::Property< ::KDL::JntArray >;
+template class RTT::Attribute< ::KDL::JntArray >;
+
+
 namespace KDL{
   using namespace std;
   using namespace RTT;
