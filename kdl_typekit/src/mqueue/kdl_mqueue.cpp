@@ -18,21 +18,21 @@ using namespace RTT;
 using namespace RTT::mqueue;
 using namespace RTT::types;
 using namespace Eigen;
-  
+
 // From Shmuel Levine : http://stackoverflow.com/questions/18382457/eigen-and-boostserialize
 namespace boost{
     namespace serialization{
 
-        template<   class Archive, 
-                    class S, 
-                    int Rows_, 
-                    int Cols_, 
-                    int Ops_, 
-                    int MaxRows_, 
+        template<   class Archive,
+                    class S,
+                    int Rows_,
+                    int Cols_,
+                    int Ops_,
+                    int MaxRows_,
                     int MaxCols_>
         inline void save(
-            Archive & ar, 
-            const Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g, 
+            Archive & ar,
+            const Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g,
             const unsigned int version)
             {
                 int rows = g.rows();
@@ -43,16 +43,16 @@ namespace boost{
                 ar & boost::serialization::make_array(g.data(), rows * cols);
             }
 
-        template<   class Archive, 
-                    class S, 
+        template<   class Archive,
+                    class S,
                     int Rows_,
                     int Cols_,
-                    int Ops_, 
-                    int MaxRows_, 
+                    int Ops_,
+                    int MaxRows_,
                     int MaxCols_>
         inline void load(
-            Archive & ar, 
-            Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g, 
+            Archive & ar,
+            Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g,
             const unsigned int version)
         {
             int rows, cols;
@@ -62,16 +62,16 @@ namespace boost{
             ar & boost::serialization::make_array(g.data(), rows * cols);
         }
 
-        template<   class Archive, 
-                    class S, 
-                    int Rows_, 
-                    int Cols_, 
-                    int Ops_, 
-                    int MaxRows_, 
+        template<   class Archive,
+                    class S,
+                    int Rows_,
+                    int Cols_,
+                    int Ops_,
+                    int MaxRows_,
                     int MaxCols_>
         inline void serialize(
-            Archive & ar, 
-            Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g, 
+            Archive & ar,
+            Eigen::Matrix<S, Rows_, Cols_, Ops_, MaxRows_, MaxCols_> & g,
             const unsigned int version)
         {
             split_free(ar, g, version);
@@ -84,66 +84,66 @@ namespace boost{
 namespace boost{
     namespace serialization{
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Rotation& g, 
+            Archive & ar,
+            KDL::Rotation& g,
             const unsigned int version)
         {
             ar & make_array(g.data,9);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Vector& g, 
+            Archive & ar,
+            KDL::Vector& g,
             const unsigned int version)
         {
             ar & make_array(g.data,3);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Twist& g, 
+            Archive & ar,
+            KDL::Twist& g,
             const unsigned int version)
         {
             ar & make_array(g.rot.data,3);
             ar & make_array(g.vel.data,3);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Wrench& g, 
+            Archive & ar,
+            KDL::Wrench& g,
             const unsigned int version)
         {
             ar & make_array(g.force.data,3);
             ar & make_array(g.torque.data,3);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Frame& g, 
+            Archive & ar,
+            KDL::Frame& g,
             const unsigned int version)
         {
             ar & make_array(g.p.data,3);
             ar & make_array(g.M.data,9);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::Jacobian& g, 
+            Archive & ar,
+            KDL::Jacobian& g,
             const unsigned int version)
         {
             serialize(ar,g.data,version);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::JntArray& g, 
+            Archive & ar,
+            KDL::JntArray& g,
             const unsigned int version)
         {
             serialize(ar,g.data,version);
         }
         template<class Archive> inline void serialize(
-            Archive & ar, 
-            KDL::JntArrayVel& g, 
+            Archive & ar,
+            KDL::JntArrayVel& g,
             const unsigned int version)
         {
             serialize(ar,g.q.data,version);
             serialize(ar,g.qdot.data,version);
         }
-        
+
     }
 }
 namespace RTT {
@@ -184,3 +184,4 @@ namespace RTT {
 }
 
 ORO_TYPEKIT_PLUGIN( RTT::mqueue::MQKDLPlugin )
+

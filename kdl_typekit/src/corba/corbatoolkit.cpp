@@ -67,3 +67,4 @@ namespace KDL
 }
 
 ORO_TYPEKIT_PLUGIN( KDL::Corba::CorbaKDLPlugin)
+

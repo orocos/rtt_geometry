@@ -100,3 +100,4 @@ namespace RTT {
 }
 
 ORO_TYPEKIT_PLUGIN( RTT::mqueue::MQEigenPlugin )
+

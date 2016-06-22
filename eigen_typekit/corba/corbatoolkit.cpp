@@ -57,3 +57,4 @@ namespace Eigen
 }
 
 ORO_TYPEKIT_PLUGIN( Eigen::corba::CorbaEigenPlugin)
+

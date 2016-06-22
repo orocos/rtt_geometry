@@ -3,3 +3,4 @@ module corba {
 	typedef sequence<double> DoubleSequence;
 };
 };
+
