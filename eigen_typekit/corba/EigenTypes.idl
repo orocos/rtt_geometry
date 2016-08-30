@@ -1,0 +1,6 @@
+module Eigen {
+module corba {
+	typedef sequence<double> DoubleSequence;
+};
+};
+

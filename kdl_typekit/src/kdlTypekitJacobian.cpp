@@ -20,4 +20,5 @@ namespace KDL{
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Jacobian > >("KDL.Jacobian[]") );
   };
 
-}  
+}
+
