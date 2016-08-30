@@ -20,24 +20,24 @@
 // Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  ***************************************************************************/
 
-#ifndef ORO_KDL_CORBATOOLKIT_HPP
-#define ORO_KDL_CORBATOOLKIT_HPP 1
+#ifndef ORO_EIGEN_CORBATOOLKIT_HPP
+#define ORO_EIGEN_CORBATOOLKIT_HPP 1
 
 #include <rtt/types/TransportPlugin.hpp>
 
-namespace KDL
+namespace Eigen
 {
-    namespace Corba
+    namespace corba
     {
-      struct CorbaKDLPlugin : public RTT::types::TransportPlugin
+      struct CorbaEigenPlugin : public RTT::types::TransportPlugin
         {
-	  bool registerTransport(std::string name, RTT::types::TypeInfo* ti);
+          bool registerTransport(std::string name, RTT::types::TypeInfo* ti);
 
-            std::string getTransportName() const;
+          std::string getTransportName() const;
 
-            std::string getName() const;
-	  
-	    std::string getTypekitName() const;
+          std::string getName() const;
+
+          std::string getTypekitName() const;
         };
 
     }

@@ -46,6 +46,10 @@ namespace KDL
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Wrench >() );
                 if ( name == "KDL.Twist" )
                     return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Twist >() );
+                if ( name == "KDL.Jacobian" )
+                    return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::Jacobian >() );
+                if ( name == "KDL.JntArray" )
+                    return ti->addProtocol(ORO_CORBA_PROTOCOL_ID, new CorbaTemplateProtocol< KDL::JntArray >() );
                 return false;
             }
 
@@ -63,3 +67,4 @@ namespace KDL
 }
 
 ORO_TYPEKIT_PLUGIN( KDL::Corba::CorbaKDLPlugin)
+
