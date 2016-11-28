@@ -18,5 +18,6 @@ namespace KDL{
   void loadChainTypes(){
     RTT::types::Types()->addType( new KDLTypeInfo<Chain>("KDL.Chain") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Chain > >("KDL.Chain[]") );
+    RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Chain > >("KDL.cChain[]") );
   };
 }  

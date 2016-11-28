@@ -183,5 +183,6 @@ namespace KDL{
     void loadJntArrayTypes(){
         RTT::types::Types()->addType( new JntArrayTypeInfo() );
         RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< JntArray > >("KDL.JntArray[]") );
+        RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< JntArray > >("KDL.cJntArray[]") );
   };
 }  

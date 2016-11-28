@@ -51,6 +51,8 @@
 #include <rtt/types/TemplateTypeInfo.hpp>
 #include <rtt/types/SequenceTypeInfo.hpp>
 #include <rtt/types/StructTypeInfo.hpp>
+#include <rtt/types/carray.hpp>
+#include <rtt/types/CArrayTypeInfo.hpp>
 #include <rtt/types/Operators.hpp>
 #include <rtt/types/OperatorTypes.hpp>
 #include <rtt/internal/mystd.hpp>
