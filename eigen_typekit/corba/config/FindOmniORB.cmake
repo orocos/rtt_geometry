@@ -157,6 +157,16 @@ ENDIF ()
 # Generate all files required for a corba server app.
 # ORO_ADD_CORBA_SERVERS( foo_SRCS foo_HPPS file.idl ... ) 
 MACRO(ORO_ADD_CORBA_SERVERS _sources _headers)
+
+   if(NOT CATKIN_DEVEL_PREFIX)
+      set(_header_output_dir "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/transports/corba")
+      include_directories(${CMAKE_CURRENT_BINARY_DIR})
+   else()
+      set(_header_output_dir "${CATKIN_DEVEL_PREFIX}/include/orocos/${PROJECT_NAME}/transports/corba")
+      include_directories(${CATKIN_DEVEL_PREFIX}/include/orocos)
+   endif()
+   file(MAKE_DIRECTORY ${_header_output_dir})
+
    FOREACH (_current_FILE ${ARGN})
 
       GET_FILENAME_COMPONENT(_tmp_FILE ${_current_FILE} ABSOLUTE)
@@ -172,15 +182,24 @@ MACRO(ORO_ADD_CORBA_SERVERS _sources _headers)
          # the current CMakeLists.txt file, the ADD_CUSTOM_COMMAND is plainly
          # ignored and left out of the make files.
          ADD_CUSTOM_COMMAND(OUTPUT ${_out} ${_outh}
-#          COMMAND ${OMNIORB4_IDL_COMPILER} -bcxx -Wba -Wbh=C.h -Wbs=C.cc -I${CMAKE_CURRENT_SOURCE_DIR} ${_current_FILE}
-          COMMAND ${OMNIORB4_IDL_COMPILER} -bcxx -Wba -Wbh=C.h -Wbs=C.cc -I${CMAKE_CURRENT_SOURCE_DIR} -C${CMAKE_CURRENT_BINARY_DIR} ${_current_FILE}
-		  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+          COMMAND ${OMNIORB4_IDL_COMPILER} -bcxx -Wba -Wbh=C.h -Wbs=C.cc -I${CMAKE_CURRENT_SOURCE_DIR} -I${_filedir} -C${CMAKE_CURRENT_BINARY_DIR} ${_current_FILE}
           DEPENDS ${_tmp_FILE}
          )
-     ENDIF (NOT HAVE_${_basename}_SERVER_RULE)
+      ENDIF (NOT HAVE_${_basename}_SERVER_RULE)
 
-     SET(${_sources} ${${_sources}} ${_out})
-     SET(${_headers} ${${_headers}} ${_outh})
-    ENDFOREACH (_current_FILE)
+      SET(${_sources} ${${_sources}} ${_out})
+      FOREACH(_header ${_outh})
+         GET_FILENAME_COMPONENT(_header_filename ${_header} NAME)
+         ADD_CUSTOM_COMMAND(OUTPUT ${_header_output_dir}/${_header_filename}
+            COMMAND ${CMAKE_COMMAND} -E copy ${_header} ${_header_output_dir}/${_header_filename}
+            DEPENDS ${_header}
+            COMMENT "Copying ${_header} to ${_header_output_dir}/${_header_filename}"
+         )
+         SET(${_headers} ${${_headers}} ${_header_output_dir}/${_header_filename})
+         SET_SOURCE_FILES_PROPERTIES(${_header_output_dir}/${_header_filename} PROPERTIES GENERATED TRUE)
+      ENDFOREACH()
+
+      SET_SOURCE_FILES_PROPERTIES(${_out} ${_outh} PROPERTIES GENERATED TRUE)
+   ENDFOREACH (_current_FILE)
 ENDMACRO(ORO_ADD_CORBA_SERVERS)
 

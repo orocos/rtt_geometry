@@ -185,6 +185,16 @@ ENDIF ()
 # Generate all files required for a corba server app.
 # ORO_ADD_CORBA_SERVERS( foo_SRCS foo_HPPS file.idl ... ) 
 MACRO(ORO_ADD_CORBA_SERVERS _sources _headers)
+
+   if(NOT CATKIN_DEVEL_PREFIX)
+      set(_header_output_dir "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/transports/corba")
+      include_directories(${CMAKE_CURRENT_BINARY_DIR})
+   else()
+      set(_header_output_dir "${CATKIN_DEVEL_PREFIX}/include/orocos/${PROJECT_NAME}/transports/corba")
+      include_directories(${CATKIN_DEVEL_PREFIX}/include/orocos)
+   endif()
+   file(MAKE_DIRECTORY ${_header_output_dir})
+
    FOREACH (_current_FILE ${ARGN})
 
       GET_FILENAME_COMPONENT(_tmp_FILE ${_current_FILE} ABSOLUTE)
@@ -192,14 +202,14 @@ MACRO(ORO_ADD_CORBA_SERVERS _sources _headers)
       GET_FILENAME_COMPONENT(_filedir ${_tmp_FILE} PATH)
 
       SET(_server  ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S.cpp)
-      SET(_serverh ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S.h ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S.inl)
+      SET(_serverh ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S.h)
 
       set(DEFINE_TAO "-DCORBA_IS_TAO")
       # From TAO 1.5 onwards, the _T files are no longer generated
       IF( NOT TAO_15 )
           SET(_tserver )
           SET(_tserverh ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S_T.h ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S_T.inl ${CMAKE_CURRENT_BINARY_DIR}/${_basename}S_T.cpp)
-	  set(DEFINE_TAO "")
+          set(DEFINE_TAO "")
       ENDIF( NOT TAO_15 )
 
       SET(_client  ${CMAKE_CURRENT_BINARY_DIR}/${_basename}C.cpp)
@@ -207,16 +217,25 @@ MACRO(ORO_ADD_CORBA_SERVERS _sources _headers)
 
       IF (NOT HAVE_${_basename}_SERVER_RULE)
          SET(HAVE_${_basename}_SERVER_RULE ON)
-	 # CMake atrocity: if none of these OUTPUT files is used in a target in the current CMakeLists.txt file,
-	 # the ADD_CUSTOM_COMMAND is plainly ignored and left out of the make files.
+         # CMake atrocity: if none of these OUTPUT files is used in a target in the current CMakeLists.txt file,
+         # the ADD_CUSTOM_COMMAND is plainly ignored and left out of the make files.
          ADD_CUSTOM_COMMAND(OUTPUT ${_tserver} ${_server} ${_client} ${_tserverh} ${_serverh} ${_clienth}
-          COMMAND ${TAO_IDL_EXECUTABLE} -Wb,export_macro=RTT_CORBA_API -Wb,export_include=rtt-corba-config.h ${_current_FILE} -o ${CMAKE_CURRENT_BINARY_DIR} -I${CMAKE_CURRENT_SOURCE_DIR} -I${ORBSVCS_DIR} ${DEFINE_TAO}
+          COMMAND ${TAO_IDL_EXECUTABLE} -Wb,export_macro=RTT_CORBA_API -Wb,export_include=rtt/transports/corba/rtt-corba-config.h ${_current_FILE} -o ${CMAKE_CURRENT_BINARY_DIR} -I${CMAKE_CURRENT_SOURCE_DIR} -I${_filedir} -I${ORBSVCS_DIR} ${DEFINE_TAO}
           DEPENDS ${_tmp_FILE}
          )
      ENDIF (NOT HAVE_${_basename}_SERVER_RULE)
 
      SET(${_sources} ${${_sources}} ${_server} ${_tserver} ${_client})
-     SET(${_headers} ${${_headers}} ${_serverh} ${_tserverh} ${_clienth})
+     FOREACH(_header ${_serverh} ${_tserverh} ${_clienth})
+        GET_FILENAME_COMPONENT(_header_filename ${_header} NAME)
+        ADD_CUSTOM_COMMAND(OUTPUT ${_header_output_dir}/${_header_filename}
+           COMMAND ${CMAKE_COMMAND} -E copy ${_header} ${_header_output_dir}/${_header_filename}
+           DEPENDS ${_header}
+           COMMENT "Copying ${_header} to ${_header_output_dir}/${_header_filename}"
+        )
+        SET(${_headers} ${${_headers}} ${_header_output_dir}/${_header_filename})
+        SET_SOURCE_FILES_PROPERTIES(${_header_output_dir}/${_header_filename} PROPERTIES GENERATED TRUE)
+     ENDFOREACH()
 
      SET_SOURCE_FILES_PROPERTIES(${_server} ${_serverh} ${_tserver} ${_client} ${_tserverh} ${_clienth} PROPERTIES GENERATED TRUE)
     ENDFOREACH (_current_FILE)

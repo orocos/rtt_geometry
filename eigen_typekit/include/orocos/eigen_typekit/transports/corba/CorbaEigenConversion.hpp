@@ -1,5 +1,8 @@
+#ifndef ORO_EIGEN_CORBAEIGENCONVERSION_HPP
+#define ORO_EIGEN_CORBAEIGENCONVERSION_HPP 1
+
 #include <Eigen/Dense>
-#include <EigenTypesC.h>
+#include <eigen_typekit/transports/corba/EigenTypesC.h>
 
 namespace RTT
 {
@@ -122,6 +125,7 @@ namespace RTT
 
     };
 
-  };//namespace corba
-};//namespace RTT
+  } //namespace corba
+} //namespace RTT
 
+#endif // ORO_EIGEN_CORBAEIGENCONVERSION_HPP

@@ -1,4 +1,4 @@
-#include "kdl_mqueue.hpp"
+#include <kdl_typekit/transports/mqueue/kdl_mqueue.hpp>
 #include <rtt/transports/mqueue/MQTemplateProtocol.hpp>
 #include <rtt/transports/mqueue/MQSerializationProtocol.hpp>
 #include <rtt/types/TransportPlugin.hpp>

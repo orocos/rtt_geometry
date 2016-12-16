@@ -44,7 +44,7 @@
 #ifndef ORO_KDL_TYPEKIT_HPP
 #define ORO_KDL_TYPEKIT_HPP
 
-#include "kdlTypekitTypes.hpp"
+#include <kdl_typekit/typekit/Types.hpp>
 #include <rtt/types/TypekitPlugin.hpp>
 #include <kdl/frames.hpp>
 #include <rtt/types/Types.hpp>

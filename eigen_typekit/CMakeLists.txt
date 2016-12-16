@@ -7,13 +7,16 @@ find_package(Eigen REQUIRED)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake )
 
-include_directories(${Eigen_INCLUDE_DIRS})
+include_directories(
+  include/orocos
+  ${Eigen_INCLUDE_DIRS}
+)
 
 add_subdirectory(mqueue)
 add_subdirectory(corba)
 
 orocos_typekit(eigen_typekit eigen_typekit.cpp)
 
-orocos_install_headers(eigen_typekit.hpp)
+orocos_install_headers(include/orocos/eigen_typekit/eigen_typekit.hpp)
 
 orocos_generate_package()

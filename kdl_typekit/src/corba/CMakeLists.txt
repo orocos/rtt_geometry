@@ -24,9 +24,15 @@ if(OROCOS-RTT_CORBA_FOUND)
 #    SET(CMAKE_C_FLAGS_RTT "${CMAKE_C_FLAGS_RTT} -I${ORBSVCS_DIR}" CACHE INTERNAL "")
 #  ENDIF( NOT ${ORBSVCS_DIR} STREQUAL /usr/include )
 
-  FILE( GLOB IDLS [^.]*.idl )
+  FILE( GLOB IDLS
+    ${PROJECT_SOURCE_DIR}/include/orocos/${PROJECT_NAME}/transports/corba/[^.]*.idl
+  )
   FILE( GLOB CPPS [^.]*.cpp )
-  FILE( GLOB HPPS [^.]*.hpp [^.]*.h [^.]*.inl)
+  FILE( GLOB HPPS
+    ${PROJECT_SOURCE_DIR}/include/orocos/${PROJECT_NAME}/transports/corba/[^.]*.hpp
+    ${PROJECT_SOURCE_DIR}/include/orocos/${PROJECT_NAME}/transports/corba/[^.]*.h
+    ${PROJECT_SOURCE_DIR}/include/orocos/${PROJECT_NAME}/transports/corba/[^.]*.inl
+  )
 
   ORO_ADD_CORBA_SERVERS(CPPS HPPS ${IDLS} )
   SET( ENV{GLOBAL_GENERATED_SRCS} "${CPPS}" )
@@ -35,11 +41,9 @@ if(OROCOS-RTT_CORBA_FOUND)
   # make -j<N> causes corruption of generated files because of overwriting
   ADD_CUSTOM_TARGET( idl-kdl-corba DEPENDS ${CPPS} ${HPPS}
             COMMENT "Generating sources from .idl files")
-            
-  INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
 
   orocos_use_package(orocos_kdl)
-  orocos_typekit(kdl-transport-corba SHARED ${CPPS})
+  orocos_typekit(kdl-transport-corba SHARED ${CPPS} ${HPPS})
   # Is used for building  the library
   TARGET_LINK_LIBRARIES(kdl-transport-corba ${OROCOS-RTT_CORBA_LIBRARIES})
 
