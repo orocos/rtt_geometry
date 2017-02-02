@@ -20,8 +20,11 @@ before_install:
   - git clone https://github.com/orocos/orocos_kinematics_dynamics.git
   - popd
   # Create non-isolated workspace
-  - mkdir -p ~/ws
-  - ln -s ../ws_isolated/src ~/ws/src
+  - mkdir -p ~/ws/src
+  - pushd ~/ws/src
+  - ln -s $CI_SOURCE_PATH
+  - #git clone https://github.com/orocos/orocos_kinematics_dynamics.git
+  - popd
   # Install dependencies
   - rosdep install -r --from-paths ~/ws/src ~/ws_isolated/src --ignore-src --rosdistro $ROS_DISTRO -y > /dev/null
   # Source the ROS setup script again due to eventually updated env-hooks
