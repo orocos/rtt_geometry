@@ -21,7 +21,7 @@ protected:
         ASSERT_TRUE(RTT::plugin::PluginLoader::Instance()->loadTypekit("kdl_typekit",RTT::plugin::PluginLoader::Instance()->getPluginPath())) << "Failed to load kdl typekit";
         ASSERT_TRUE(tc.loadService("scripting")) << "Unable to load scripting service";
         scripting = boost::dynamic_pointer_cast<RTT::scripting::ScriptingService>( tc.provides()->getService("scripting") );
-        ASSERT_TRUE(scripting) << "Failed to get loaded scripting service";
+        ASSERT_TRUE(scripting.get()) << "Failed to get loaded scripting service";
 
         tc.addOperation("throw",&throw_function);
         tc.setPeriod(0.01);
@@ -37,7 +37,7 @@ protected:
 
 TEST_F(KDLPluginScriptingTest, ScriptTest) {
     RTT::scripting::ProgramInterfacePtr program = scripting->getProgram("vector_test");
-    ASSERT_TRUE(program) << "Failed to get program";
+    ASSERT_TRUE(program.get()) << "Failed to get program";
     ASSERT_TRUE(program->start());
     while(program->isRunning()) {;
         ASSERT_FALSE(program->inError()) << "program failed on line " << program->getLineNumber();
