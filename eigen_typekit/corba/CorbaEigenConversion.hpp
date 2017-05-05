@@ -122,6 +122,6 @@ namespace RTT
 
     };
 
-  };//namespace corba
-};//namespace RTT
+  } //namespace corba
+} //namespace RTT
 

@@ -19,5 +19,5 @@ namespace KDL{
     RTT::types::Types()->addType( new KDLTypeInfo<Joint>("KDL.Joint") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Joint > >("KDL.Joint[]") );
     RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Joint > >("KDL.cJoint[]") );
-  };
+  }
 }  

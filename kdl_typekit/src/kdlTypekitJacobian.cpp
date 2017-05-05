@@ -19,7 +19,7 @@ namespace KDL{
     RTT::types::Types()->addType( new KDLTypeInfo<Jacobian>("KDL.Jacobian") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Jacobian > >("KDL.Jacobian[]") );
     RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Jacobian > >("KDL.cJacobian[]") );
-  };
+  }
 
 }
 

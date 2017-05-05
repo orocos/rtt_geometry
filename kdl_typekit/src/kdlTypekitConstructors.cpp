@@ -4,27 +4,27 @@ namespace KDL{
   Frame framevr( const Vector& v, const Rotation& r )
   {
           return Frame( r, v );
-  };
+  }
   Frame framerv( const Rotation& r, const Vector& v )
   {
           return Frame( r, v );
-  };
+  }
   
   
   Wrench wrenchft( const Vector& force, const Vector& torque )
   {
           return Wrench( force, torque );
-  };
+  }
   
   Twist twistvw( const Vector& trans, const Vector& rot )
   {
           return Twist( trans, rot );
-  };
+  }
   
   Vector vectorxyz( double a, double b, double c )
   {
           return Vector( a, b, c );
-  };
+  }
   
   
   // INDEXING
@@ -172,7 +172,7 @@ namespace KDL{
     Rotation rotationAngleAxis( const Vector& axis, double angle )
     {
         return Rotation::Rot(axis, angle);
-    };
+    }
 
     bool KDLTypekitPlugin::loadConstructors()
     {
