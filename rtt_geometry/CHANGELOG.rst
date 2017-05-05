@@ -2,8 +2,10 @@
 Changelog for package rtt_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.9.0 (2017-05-05)
+------------------
+* Updated changelogs and bumped version number to 2.9.0
+* Contributors: Johannes Meyer
 
 2.8.1 (2015-07-21)
 ------------------
