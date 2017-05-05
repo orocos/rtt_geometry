@@ -6,7 +6,7 @@
 #include <rtt/TaskContext.hpp>
 #include <rtt/transports/corba/TaskContextServer.hpp>
 
-#include "kdlTypekitTypes.hpp"
+#include <kdl_typekit/typekit/Types.hpp>
 
 class KDLCORBAPluginTest : public testing::Test {
 

@@ -1,4 +1,7 @@
-#include "KDLTypesC.h"
+#ifndef ORO_KDL_CORBAKDLCONVERSION_HPP
+#define ORO_KDL_CORBAKDLCONVERSION_HPP 1
+
+#include <kdl_typekit/transports/corba/KDLTypesC.h>
 #include <rtt/transports/corba/CorbaConversion.hpp>
 #include <kdl/frames.hpp>
 #include <kdl/jacobian.hpp>
@@ -396,6 +399,7 @@ namespace RTT
         return true;
       }
     };
-  };//namespace corba
-};//namespace RTT
+  } //namespace corba
+} //namespace RTT
 
+#endif // ORO_KDL_CORBAKDLCONVERSION_HPP

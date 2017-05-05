@@ -10,6 +10,9 @@ if(OROCOS-RTT_MQUEUE_FOUND)
 
   target_link_libraries(kdl-transport-mqueue ${OROCOS-RTT_MQUEUE_LIBRARIES} ${orocos_kdl_LIBRARIES})
 
-  install(FILES kdl_mqueue.hpp DESTINATION include/orocos/kdl_typekit/transports/mqueue)
+  orocos_install_headers(
+    FILES ${PROJECT_SOURCE_DIR}/include/orocos/${PROJECT_NAME}/transports/mqueue/kdl_mqueue.hpp
+    INSTALL include/orocos/kdl_typekit/transports/mqueue
+  )
 
 endif()

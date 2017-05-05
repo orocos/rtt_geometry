@@ -1,4 +1,4 @@
-#include "eigen_mqueue.hpp"
+#include <eigen_typekit/transports/mqueue/eigen_mqueue.hpp>
 #include <rtt/transports/mqueue/MQTemplateProtocol.hpp>
 #include <rtt/transports/mqueue/MQSerializationProtocol.hpp>
 #include <rtt/types/TransportPlugin.hpp>
