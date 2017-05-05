@@ -28,5 +28,6 @@ namespace KDL{
   void loadWrenchTypes(){
     RTT::types::Types()->addType( new KDLVectorTypeInfo<Wrench,6>("KDL.Wrench") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Wrench > >("KDL.Wrench[]") );
+    RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Wrench > >("KDL.cWrench[]") );
   };
 }  

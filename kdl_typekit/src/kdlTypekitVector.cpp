@@ -28,5 +28,6 @@ namespace KDL{
   void loadVectorTypes(){
     RTT::types::Types()->addType( new KDLVectorTypeInfo<Vector,3>("KDL.Vector") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Vector > >("KDL.Vector[]") );
+    RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Vector > >("KDL.cVector[]") );
   };
 }  
