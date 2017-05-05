@@ -88,7 +88,7 @@ namespace KDL
       if (index >= size || index < 0)
           return internal::NA<double&>::na();
       return cont[index];
-  };
+  }
 
   /**
    * Returns a copy to one item in an STL container.
@@ -103,7 +103,7 @@ namespace KDL
       if (index >= size || index < 0)
           return internal::NA<double>::na();
       return cont[index];
-  };
+  }
 
   /**
    * KDL RTT bindings
@@ -159,24 +159,24 @@ namespace KDL
   };
 
   /**
-     * Template class used for Frame, Rotation
-     */
-    template<class KDLType>
-    struct KDLTypeInfo
-      : public StructTypeInfo<KDLType,true>
-    {
-      KDLTypeInfo(std::string name) : StructTypeInfo<KDLType,true>(name) {}
+   * Template class used for Frame, Rotation
+   */
+  template<class KDLType>
+  struct KDLTypeInfo
+    : public StructTypeInfo<KDLType,true>
+  {
+    KDLTypeInfo(std::string name) : StructTypeInfo<KDLType,true>(name) {}
 
-      virtual bool decomposeTypeImpl(const KDLType& source, PropertyBag& targetbag ) const {
-        decomposeProperty( source, targetbag );
-        return true;
-      }
+    virtual bool decomposeTypeImpl(const KDLType& source, PropertyBag& targetbag ) const {
+      decomposeProperty( source, targetbag );
+      return true;
+    }
 
-      virtual bool composeTypeImpl(const PropertyBag& source, KDLType& result) const {
-        return composeProperty( source, result );
-      }
+    virtual bool composeTypeImpl(const PropertyBag& source, KDLType& result) const {
+      return composeProperty( source, result );
+    }
 
-    };
+  };
 
   /**
    * The single global instance of the KDL Typekit.

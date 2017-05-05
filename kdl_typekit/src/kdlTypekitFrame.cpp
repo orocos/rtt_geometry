@@ -29,6 +29,6 @@ namespace KDL{
     RTT::types::Types()->addType( new KDLTypeInfo<Frame>("KDL.Frame") );
     RTT::types::Types()->addType( new SequenceTypeInfo<std::vector< Frame > >("KDL.Frame[]") );
     RTT::types::Types()->addType( new CArrayTypeInfo<RTT::types::carray< Frame > >("KDL.cFrame[]") );
-  };
+  }
 
 }  
