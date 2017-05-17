@@ -2,7 +2,7 @@
 Changelog for package kdl_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.9.0 (2017-05-05)
+2.9.0 (2017-05-17)
 ------------------
 * Fixed extra semicolon warnings when compiling in pedantic mode
 * Merge pull request `#24 <https://github.com/orocos/rtt_geometry/issues/24>`_ from meyerj/fix/eigen3-cmake into toolchain-2.9
