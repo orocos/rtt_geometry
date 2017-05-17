@@ -396,6 +396,6 @@ namespace RTT
         return true;
       }
     };
-  };//namespace corba
-};//namespace RTT
+  } //namespace corba
+} //namespace RTT
 
