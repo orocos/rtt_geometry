@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(eigen_typekit)
 
-find_package(cmake_modules REQUIRED)
-
 find_package(Eigen3 QUIET)
 if(NOT Eigen3_FOUND)
+  find_package(cmake_modules QUIET)
   find_package(Eigen QUIET)
   if(Eigen_FOUND)
     set(EIGEN3_INCLUDE_DIRS ${Eigen_INCLUDE_DIRS})
