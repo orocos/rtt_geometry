@@ -2,6 +2,10 @@
 Changelog for package kdl_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.1 (2017-07-28)
+------------------
+* Contributors: Johannes Meyer
+
 2.9.0 (2017-05-17)
 ------------------
 * Fixed extra semicolon warnings when compiling in pedantic mode
