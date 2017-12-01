@@ -34,7 +34,7 @@
 #include <rtt/internal/DataSourceGenerator.hpp>
 #include <boost/lexical_cast.hpp>
 
-#define DECLARE_RTT_VECTOR_EXPORTS( VectorType) \
+#define DECLARE_RTT_VECTOR_EXPORTS( VectorType ) \
 template class RTT_EXPORT RTT::internal::DataSourceTypeInfo< VectorType >; \
 template class RTT_EXPORT RTT::internal::DataSource< VectorType >; \
 template class RTT_EXPORT RTT::internal::AssignableDataSource< VectorType >; \
@@ -52,20 +52,27 @@ DECLARE_RTT_VECTOR_EXPORTS( Eigen::VectorXd )
 DECLARE_RTT_VECTOR_EXPORTS( Eigen::Vector2d )
 DECLARE_RTT_VECTOR_EXPORTS( Eigen::Vector3d )
 DECLARE_RTT_VECTOR_EXPORTS( Eigen::Vector4d )
+DECLARE_RTT_VECTOR_EXPORTS( Eigen::Vector6d )
 
-template class RTT_EXPORT RTT::internal::DataSourceTypeInfo< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::DataSource< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::AssignableDataSource< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::AssignCommand< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::ValueDataSource< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::ConstantDataSource< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::internal::ReferenceDataSource< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::OutputPort< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::InputPort< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::Property< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::Attribute< Eigen::MatrixXd >;
-template class RTT_EXPORT RTT::Constant< Eigen::MatrixXd >;
+#define DECLARE_RTT_MATRIX_EXPORTS( MatrixType ) \
+template class RTT_EXPORT RTT::internal::DataSourceTypeInfo< MatrixType >; \
+template class RTT_EXPORT RTT::internal::DataSource< MatrixType >; \
+template class RTT_EXPORT RTT::internal::AssignableDataSource< MatrixType >; \
+template class RTT_EXPORT RTT::internal::AssignCommand< MatrixType >; \
+template class RTT_EXPORT RTT::internal::ValueDataSource< MatrixType >; \
+template class RTT_EXPORT RTT::internal::ConstantDataSource< MatrixType >; \
+template class RTT_EXPORT RTT::internal::ReferenceDataSource< MatrixType >; \
+template class RTT_EXPORT RTT::OutputPort< MatrixType >; \
+template class RTT_EXPORT RTT::InputPort< MatrixType >; \
+template class RTT_EXPORT RTT::Property< MatrixType >; \
+template class RTT_EXPORT RTT::Attribute< MatrixType >; \
+template class RTT_EXPORT RTT::Constant< MatrixType >;
 
+DECLARE_RTT_MATRIX_EXPORTS( Eigen::MatrixXd )
+DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix2d )
+DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix3d )
+DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix4d )
+DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix6d )
 
 #include <Eigen/Core>
 namespace Eigen{
@@ -74,36 +81,32 @@ namespace Eigen{
     using namespace RTT::detail;
     using namespace RTT::types;
 
-    std::istream& operator>>(std::istream &is,MatrixXd& v){
+    template<typename Derived>
+    std::istream& operator>>(std::istream &is, EigenBase<Derived>& v){
       return is;
     }
-
-#define DECLARE_VECTOR_GET_FUNCTIONS(VectorType) \
-    std::istream& operator>>(std::istream &is,VectorType& v){ \
-      return is; \
-    } \
-    double& get_item(VectorType& v, int index) \
-    { \
-        if (index >= (int) (v.size()) || index < 0) \
-            return RTT::internal::NA<double&>::na(); \
-        return v[index]; \
-    } \
-    double get_item_copy(const VectorType& v, int index) \
-    { \
-        if (index >= (int) (v.size()) || index < 0) \
-            return RTT::internal::NA<double>::na(); \
-        return v[index]; \
-    } \
-    int get_size(const VectorType& v) \
-    { \
-        return v.size(); \
+    
+    template<typename VectorType>
+    double& get_item(VectorType& v, int index)
+    {
+        if (index >= (int) (v.size()) || index < 0)
+            return RTT::internal::NA<double&>::na();
+        return v[index];
     }
     
-    DECLARE_VECTOR_GET_FUNCTIONS( Eigen::VectorXd )
-    DECLARE_VECTOR_GET_FUNCTIONS( Eigen::Vector2d )
-    DECLARE_VECTOR_GET_FUNCTIONS( Eigen::Vector3d )
-    DECLARE_VECTOR_GET_FUNCTIONS( Eigen::Vector4d )
+    template<typename VectorType>
+    double get_item_copy(const VectorType& v, int index)
+    {
+        if (index >= (int) (v.size()) || index < 0)
+            return RTT::internal::NA<double>::na();
+        return v[index];
+    }
     
+    template<typename VectorType>
+    int get_size(const VectorType& v)
+    {
+        return v.size();
+    }
 
     template<class VectorType>
     struct VectorTypeInfo : public types::TemplateTypeInfo<VectorType,true>
@@ -111,12 +114,10 @@ namespace Eigen{
                           , public MemberFactory
 #endif
     {
-        VectorTypeInfo(const std::string& type_name):TemplateTypeInfo<VectorType, true >(type_name), type_name_(type_name)
+        VectorTypeInfo(const std::string& type_name):TemplateTypeInfo<VectorType, true >(type_name)
         {
         };
-        
-        const std::string type_name_; 
-        
+                
 #if (RTT_VERSION_MAJOR*100+RTT_VERSION_MINOR) >= 206
         bool installTypeInfoObject(TypeInfo* ti) {
             // aquire a shared reference to the this object
@@ -136,8 +137,8 @@ namespace Eigen{
         bool resize(base::DataSourceBase::shared_ptr arg, int size) const
         {
             if (arg->isAssignable()) {
-	        typedef typename RTT::internal::AssignableDataSource<VectorType>::shared_ptr sh_ptr;
-            sh_ptr asarg = RTT::internal::AssignableDataSource<VectorType>::narrow( arg.get() );
+	        typedef typename RTT::internal::AssignableDataSource<VectorType >::shared_ptr sh_ptr;
+            sh_ptr asarg = RTT::internal::AssignableDataSource<VectorType >::narrow( arg.get() );
                 asarg->set().resize( size );
                 asarg->updated();
                 return true;
@@ -172,8 +173,7 @@ namespace Eigen{
             if ( id_name ) {
                 if ( id_name->get() == "size" || id_name->get() == "capacity") {
                     try {
-                        int (*get_size_pf)(const VectorType&) = get_size;
-                        return RTT::internal::newFunctorDataSource(get_size_pf, RTT::internal::GenerateDataSource()(item.get()) );
+                        return RTT::internal::newFunctorDataSource(&get_size<VectorType>, RTT::internal::GenerateDataSource()(item.get()) );
                     } catch(...) {}
                 }
             }
@@ -182,13 +182,11 @@ namespace Eigen{
                 try {
                     if ( item->isAssignable() )
                     {
-                        double& (*get_item_pf)(VectorType&,int) = get_item;
-                        return RTT::internal::newFunctorDataSource(get_item_pf, RTT::internal::GenerateDataSource()(item.get(), id_indx.get() ) );
+                        return RTT::internal::newFunctorDataSource(get_item<VectorType>, RTT::internal::GenerateDataSource()(item.get(), id_indx.get() ) );
                     }
                     else
                     {
-                        double (*get_item_copy_pf)(const VectorType&,int) = get_item_copy;
-                        return RTT::internal::newFunctorDataSource(get_item_copy_pf, RTT::internal::GenerateDataSource()(item.get(), id_indx.get() ) );
+                        return RTT::internal::newFunctorDataSource(get_item_copy<VectorType>, RTT::internal::GenerateDataSource()(item.get(), id_indx.get() ) );
                     }
                 } catch(...) {}
             }
@@ -206,7 +204,7 @@ namespace Eigen{
 
         virtual bool decomposeTypeImpl(const VectorType& vec, PropertyBag& targetbag) const
         {
-            targetbag.setType(type_name_);
+            targetbag.setType(this->getTypeName());
             int dimension = vec.rows();
             std::string str;
 
@@ -225,7 +223,7 @@ namespace Eigen{
 
       virtual bool composeTypeImpl(const PropertyBag& bag, VectorType& result) const{
 
-            if ( bag.getType() == type_name_ ) {
+            if ( bag.getType() == this->getTypeName() ) {
                 int dimension = bag.size();
                 result.resize( dimension );
 
@@ -242,7 +240,7 @@ namespace Eigen{
                     }
                 }
             }else{
-                log(Error) << "Composing Property< VectorType > :"
+                log(Error) << "Composing Property< " << this->getTypeName() << " > :"
                            << " type mismatch, got type '"<< bag.getType()
                            << "', expected type "<<"eigen_vector."<<endlog();
                 return false;
@@ -251,13 +249,14 @@ namespace Eigen{
         };
     };
 
-    struct MatrixTypeInfo : public types::TemplateTypeInfo<MatrixXd,true>{
-        MatrixTypeInfo():TemplateTypeInfo<MatrixXd, true >("eigen_matrix"){
+    template<typename MatrixType>
+    struct MatrixTypeInfo : public types::TemplateTypeInfo<MatrixType,true>{
+        MatrixTypeInfo(const std::string& type_name):TemplateTypeInfo<MatrixType, true >(type_name){
         };
 
 
-        bool decomposeTypeImpl(const MatrixXd& mat, PropertyBag& targetbag) const{
-            targetbag.setType("eigen_matrix");
+        bool decomposeTypeImpl(const MatrixType& mat, PropertyBag& targetbag) const{
+            targetbag.setType(this->getTypeName());
             unsigned int dimension = mat.rows();
             if(!targetbag.empty())
                 return false;
@@ -271,8 +270,8 @@ namespace Eigen{
             return true;
         };
 
-        bool composeTypeImpl(const PropertyBag& bag, MatrixXd& result) const{
-            if ( bag.getType() == "eigen_matrix" ) {
+        bool composeTypeImpl(const PropertyBag& bag, MatrixType& result) const{
+            if ( bag.getType() == this->getTypeName() ) {
                 unsigned int rows = bag.size();
                 unsigned int cols = 0;
                 // Get values
@@ -305,7 +304,7 @@ namespace Eigen{
                     }
                 }
             }else {
-                log(Error) << "Composing Property< MatrixXd > :"
+                log(Error) << "Composing Property< " << this->getTypeName() << " > :"
                            << " type mismatch, got type '"<< bag.getType()
                            << "', expected type "<<"ublas_matrix."<<endlog();
                 return false;
@@ -325,11 +324,12 @@ namespace Eigen{
             return v(index);
         }
     };
-
-    struct get_size
-        : public std::unary_function<const VectorXd&, int>
+    
+    template<class VectorType>
+    struct get_size_functor
+        : public std::unary_function<const VectorType&, int>
     {
-        int operator()(const VectorXd& cont ) const
+        int operator()(const VectorType& cont ) const
         {
             return cont.rows();
         }
@@ -381,24 +381,26 @@ namespace Eigen{
         }
     };
 
-    struct matrix_index
-        : public std::ternary_function<const MatrixXd&, int, int, double>
+    template<typename MatrixType>
+    struct matrix_index_functor
+        : public std::ternary_function<const MatrixType&, int, int, double>
     {
-        double operator()(const MatrixXd& m, int i, int j) const{
+        double operator()(const MatrixType& m, int i, int j) const{
             if ( i >= (int)(m.rows()) || i < 0 || j<0 || j>= (int)(m.cols()))
                 return 0.0;
             return m(i,j);
         }
     };
 
+    template<typename MatrixType>
     struct matrix_i_j_constructor
-        : public std::binary_function<int,int,const MatrixXd&>
+        : public std::binary_function<int,int,const MatrixType&>
     {
-        typedef const MatrixXd& (Signature)( int, int );
-        mutable boost::shared_ptr< MatrixXd > ptr;
+        typedef const MatrixType& (Signature)( int, int );
+        mutable boost::shared_ptr< MatrixType > ptr;
         matrix_i_j_constructor() :
-            ptr( new MatrixXd() ){}
-        const MatrixXd& operator()(int size1,int size2) const
+            ptr( new MatrixType() ){}
+        const MatrixType& operator()(int size1,int size2) const
         {
             ptr->resize(size1,size2);
             return *(ptr);
@@ -417,7 +419,12 @@ namespace Eigen{
         RTT::types::TypeInfoRepository::Instance()->addType( new VectorTypeInfo<Vector2d>("eigen_vector2") );
         RTT::types::TypeInfoRepository::Instance()->addType( new VectorTypeInfo<Vector3d>("eigen_vector3") );
         RTT::types::TypeInfoRepository::Instance()->addType( new VectorTypeInfo<Vector4d>("eigen_vector4") );
-        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo() );
+        RTT::types::TypeInfoRepository::Instance()->addType( new VectorTypeInfo<Vector6d>("eigen_vector6") );
+        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<MatrixXd>("eigen_matrix") );
+        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix2d>("eigen_matrix2") );
+        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix3d>("eigen_matrix3") );
+        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix4d>("eigen_matrix4") );
+        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix6d>("eigen_matrix6") );
         return true;
     }
 
@@ -427,6 +434,7 @@ namespace Eigen{
         RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_index_constructor<Vector2d>()));
         RTT::types::Types()->type("eigen_vector3")->addConstructor(types::newConstructor(vector_index_constructor<Vector3d>()));
         RTT::types::Types()->type("eigen_vector4")->addConstructor(types::newConstructor(vector_index_constructor<Vector4d>()));
+        RTT::types::Types()->type("eigen_vector6")->addConstructor(types::newConstructor(vector_index_constructor<Vector6d>()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_value_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_array_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_index_value_constructor<Vector2d>()));
@@ -435,7 +443,13 @@ namespace Eigen{
         RTT::types::Types()->type("eigen_vector3")->addConstructor(types::newConstructor(vector_index_array_constructor<Vector3d>()));
         RTT::types::Types()->type("eigen_vector4")->addConstructor(types::newConstructor(vector_index_value_constructor<Vector4d>()));
         RTT::types::Types()->type("eigen_vector4")->addConstructor(types::newConstructor(vector_index_array_constructor<Vector4d>()));
-        RTT::types::Types()->type("eigen_matrix")->addConstructor(types::newConstructor(matrix_i_j_constructor()));
+        RTT::types::Types()->type("eigen_vector6")->addConstructor(types::newConstructor(vector_index_value_constructor<Vector6d>()));
+        RTT::types::Types()->type("eigen_vector6")->addConstructor(types::newConstructor(vector_index_array_constructor<Vector6d>()));
+        RTT::types::Types()->type("eigen_matrix")->addConstructor(types::newConstructor(matrix_i_j_constructor<MatrixXd>()));
+        RTT::types::Types()->type("eigen_matrix2")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix2d>()));
+        RTT::types::Types()->type("eigen_matrix3")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix3d>()));
+        RTT::types::Types()->type("eigen_matrix4")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix4d>()));
+        RTT::types::Types()->type("eigen_matrix6")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix6d>()));
         return true;
     }
 
@@ -445,6 +459,7 @@ namespace Eigen{
         RTT::types::OperatorRepository::Instance()->add( newBinaryOperator( "[]", vector_index<Vector2d>() ) );
         RTT::types::OperatorRepository::Instance()->add( newBinaryOperator( "[]", vector_index<Vector3d>() ) );
         RTT::types::OperatorRepository::Instance()->add( newBinaryOperator( "[]", vector_index<Vector4d>() ) );
+        RTT::types::OperatorRepository::Instance()->add( newBinaryOperator( "[]", vector_index<Vector6d>() ) );
         //RTT::types::OperatorRepository::Instance()->add( newDotOperator( "size", get_size() ) );
         //RTT::types::OperatorRepository::Instance()->add( newTernaryOperator( "[,]", matrix_index() ) );
         return true;
