@@ -39,6 +39,10 @@
 
 #include "kinfamproperties.hpp"
 #include "motionproperties.hpp"
+
+#include <rtt/Property.hpp>
+#include <rtt/PropertyBag.hpp>
+
 #include <boost/lexical_cast.hpp>
 #include <string>
 
