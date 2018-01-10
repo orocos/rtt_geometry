@@ -43,13 +43,7 @@
 #define MOTIONPROPERTIES_HPP
 
 #include <kdl/frames.hpp>
-#include <rtt/Property.hpp>
 #include <rtt/PropertyBag.hpp>
-#include <rtt/extras/MultiVector.hpp>
-#include <rtt/types/TemplateTypeInfo.hpp>
-#include <rtt/typekit/RealTimeTypekit.hpp>
-
-#include <sstream>
 
 namespace RTT
 {
@@ -139,16 +133,6 @@ namespace RTT
      * properties being a bag containing a KDL::Frame, fill the given non primitive Property<T>.
      */
     bool composeProperty(const PropertyBag& bag, KDL::Frame &f);
-}
-
-namespace RTT
-{
-    extern template class Property<KDL::Frame>;
-    //extern template class Property<KDL::JntArray>;
-    extern template class Property<KDL::Wrench>;
-    extern template class Property<KDL::Twist>;
-    extern template class Property<KDL::Rotation>;
-    extern template class Property<KDL::Vector>;
 }
 
 #endif

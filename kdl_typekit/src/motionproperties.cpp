@@ -39,25 +39,15 @@
 *                                                                             *
 *******************************************************************************/
 
+#include "motionproperties.hpp"
+
 #include <rtt/Property.hpp>
 #include <rtt/PropertyBag.hpp>
-#include <rtt/base/PropertyIntrospection.hpp>
 #include <rtt/Logger.hpp>
-#include <sstream>
-
-#include "motionproperties.hpp"
-//#include "kdltk.hpp"
 
 namespace RTT
 {
     using namespace std;
-
-
-    template class Property<KDL::Frame>;
-    template class Property<KDL::Wrench>;
-    template class Property<KDL::Twist>;
-    template class Property<KDL::Rotation>;
-    template class Property<KDL::Vector>;
 
     /**
      *

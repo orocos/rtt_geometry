@@ -50,9 +50,7 @@
 #include <kdl/jacobian.hpp>
 #include <kdl/jntarray.hpp>
 
-#include <rtt/Property.hpp>
 #include <rtt/PropertyBag.hpp>
-#include <rtt/types/TemplateTypeInfo.hpp>
 
 namespace RTT
 {
