@@ -2,6 +2,9 @@
 Changelog for package eigen_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.2 (2019-05-16)
+------------------
+
 2.9.1 (2017-07-28)
 ------------------
 * eigen_typekit: only find_package(cmake_modules) if EIGEN3 was not found

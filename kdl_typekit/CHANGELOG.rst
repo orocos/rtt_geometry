@@ -2,6 +2,11 @@
 Changelog for package kdl_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.2 (2019-05-16)
+------------------
+* kdl_typekit: remove duplicate template instantiations and moved/removed include directives (fix `#27 <https://github.com/orocos/rtt_geometry/issues/27>`_)
+* Contributors: Johannes Meyer
+
 2.9.1 (2017-07-28)
 ------------------
 
