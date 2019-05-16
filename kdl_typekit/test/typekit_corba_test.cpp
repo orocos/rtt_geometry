@@ -19,8 +19,10 @@ protected:
     {}
 
     virtual void SetUp() {
+        //Start CORBA nameserver (as a fallback if none is running yet)
+        system("omniNames -start -logdir $(mktemp -d) -errlog /dev/null & echo $! > omniNames.pid &");
         //Start server
-        system("./setupcomponent.ops -d");
+        system("./setupcomponent.ops & echo $! > setupcomponent.pid &");
         // Wait for server to startup
         sleep(3);
         //Setup corba
@@ -37,7 +39,8 @@ protected:
         depl.shutdownDeployment();
         RTT::corba::TaskContextServer::ShutdownOrb();
         RTT::corba::TaskContextServer::DestroyOrb();
-        system("pkill -f setupcomponent.ops");
+        system("kill $(cat setupcomponent.pid)");
+        system("kill $(cat omniNames.pid)");
     }
 };
 
