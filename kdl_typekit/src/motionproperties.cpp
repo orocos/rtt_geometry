@@ -94,9 +94,9 @@ namespace RTT
           Y("Y","Y Value", v[1]),
           Z("Z","Z Value", v[2])
     {
-        resultBag.add(X.clone());
-        resultBag.add(Y.clone());
-        resultBag.add(Z.clone());
+        resultBag.ownProperty(X.clone());
+        resultBag.ownProperty(Y.clone());
+        resultBag.ownProperty(Z.clone());
     }
 
     bool VectorComposer::getResult(Vector& res)
@@ -182,15 +182,15 @@ namespace RTT
           Z_y("Z_y","", r(1,2) ),
           Z_z("Z_z","", r(2,2) )
     {
-        resultBag.add(X_x.clone());
-        resultBag.add(X_y.clone());
-        resultBag.add(X_z.clone());
-        resultBag.add(Y_x.clone());
-        resultBag.add(Y_y.clone());
-        resultBag.add(Y_z.clone());
-        resultBag.add(Z_x.clone());
-        resultBag.add(Z_y.clone());
-        resultBag.add(Z_z.clone());
+        resultBag.ownProperty(X_x.clone());
+        resultBag.ownProperty(X_y.clone());
+        resultBag.ownProperty(X_z.clone());
+        resultBag.ownProperty(Y_x.clone());
+        resultBag.ownProperty(Y_y.clone());
+        resultBag.ownProperty(Y_z.clone());
+        resultBag.ownProperty(Z_x.clone());
+        resultBag.ownProperty(Z_y.clone());
+        resultBag.ownProperty(Z_z.clone());
     }
 
     bool RotationComposer::getResult(Rotation& res)
@@ -263,9 +263,9 @@ namespace RTT
           _g("gamma","Then Rotation around the new X axis with gamma in radians" )
     {
         r.GetEulerZYX(_a.set(), _b.set(), _g.set());
-        resultBag.add(_a.clone());
-        resultBag.add(_b.clone());
-        resultBag.add(_g.clone());
+        resultBag.ownProperty(_a.clone());
+        resultBag.ownProperty(_b.clone());
+        resultBag.ownProperty(_g.clone());
     }
 
     bool EulerZYXComposer::getResult(Rotation& res )
@@ -338,9 +338,9 @@ namespace RTT
           _y("Y","Next rotate around old Z with Y(aw) in radians" )
     {
         r.GetRPY(_r.set(), _p.set(), _y.set());
-        resultBag.add(_r.clone());
-        resultBag.add(_p.clone());
-        resultBag.add(_y.clone());
+        resultBag.ownProperty(_r.clone());
+        resultBag.ownProperty(_p.clone());
+        resultBag.ownProperty(_y.clone());
     }
 
     bool RPYComposer::getResult(Rotation& res)
@@ -419,8 +419,8 @@ namespace RTT
         VectorDecomposer vel( t.vel );
         VectorDecomposer rot( t.rot );
 
-        targetbag.add( new Property<PropertyBag>("vel","Translational Velocity", vel.result() ) );
-        targetbag.add( new Property<PropertyBag>("rot","Rotational Velocity",rot.result() ));
+        targetbag.ownProperty( new Property<PropertyBag>("vel","Translational Velocity", vel.result() ) );
+        targetbag.ownProperty( new Property<PropertyBag>("rot","Rotational Velocity",rot.result() ));
     }
 
     bool composeProperty(const PropertyBag& bag, Twist &t)
@@ -464,8 +464,8 @@ namespace RTT
         VectorDecomposer force( b.force );
         VectorDecomposer torque( b.torque );
 
-        targetbag.add( new Property<PropertyBag>("force", "Axial Force", force.result() ) );
-        targetbag.add( new Property<PropertyBag>("torque", "Axial Torque", torque.result() ) );
+        targetbag.ownProperty( new Property<PropertyBag>("force", "Axial Force", force.result() ) );
+        targetbag.ownProperty( new Property<PropertyBag>("torque", "Axial Torque", torque.result() ) );
     }
 
     bool composeProperty(const PropertyBag& bag,Wrench &w)
@@ -518,8 +518,8 @@ namespace RTT
 # endif
 #endif
 
-        targetbag.add( new Property<PropertyBag>("p","", vel.result() ) );
-        targetbag.add( new Property<PropertyBag>("M","", rot.result() ) );
+        targetbag.ownProperty( new Property<PropertyBag>("p","", vel.result() ) );
+        targetbag.ownProperty( new Property<PropertyBag>("M","", rot.result() ) );
     }
 
     bool composeProperty(const PropertyBag& f_bag, KDL::Frame &f)
