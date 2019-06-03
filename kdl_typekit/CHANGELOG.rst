@@ -2,6 +2,15 @@
 Changelog for package kdl_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.3 (2019-06-03)
+------------------
+* Merge pull request `#30 <https://github.com/orocos/rtt_geometry/issues/30>`_ from achim-k/toolchain-2.9
+  kdl_typekit: Use ownProperty() instead of add() to fix memory leak.
+* Merge pull request `#29 <https://github.com/orocos/rtt_geometry/issues/29>`_ from orocos/travis-ros-industrial-ci
+  Use ROS industrial_ci for Travis CI builds
+* kdl_typekit: fixed corba unit test if no nameserver is running yet (e.g. on Travis)
+* Contributors: Achim Krauch, Johannes Meyer
+
 2.9.2 (2019-05-16)
 ------------------
 * kdl_typekit: remove duplicate template instantiations and moved/removed include directives (fix `#27 <https://github.com/orocos/rtt_geometry/issues/27>`_)
