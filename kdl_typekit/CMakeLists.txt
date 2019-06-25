@@ -7,6 +7,8 @@ project(kdl_typekit)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 
+option(BUILD_LUA_RTT "Build Lua RTT bindings" ON)
+
 find_package(orocos_kdl REQUIRED)
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
@@ -56,15 +58,17 @@ if(BUILD_LUA_RTT)
     set(LUA_DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION})
   endif()
 
-  orocos_install_headers(
-    FILES include/orocos/${PROJECT_NAME}/typekit/Types.hpp
-    INSTALL include/orocos/${PROJECT_NAME}/typekit
-  )
   install(
     FILES ${LUA_FILES}
     DESTINATION ${LUA_DESTINATION}/lua/5.1/${PROJECT_NAME}/
   )
 endif()
+
+
+orocos_install_headers(
+  FILES include/orocos/${PROJECT_NAME}/typekit/Types.hpp
+  INSTALL include/orocos/${PROJECT_NAME}/typekit
+)
 
 orocos_generate_package(
   DEPENDS orocos-kdl
