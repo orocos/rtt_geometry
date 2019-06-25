@@ -7,6 +7,8 @@ project(kdl_typekit)
 find_package(OROCOS-RTT REQUIRED)
 include(${OROCOS-RTT_USE_FILE_PATH}/UseOROCOS-RTT.cmake)
 
+option(BUILD_LUA_RTT "Build Lua RTT bindings" ON)
+
 find_package(orocos_kdl REQUIRED)
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
@@ -48,22 +50,25 @@ if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
 endif()
 
-file(GLOB LUA_FILES "lua/*.lua")
-set(LUA_DESTINATION share)
-if(catkin_FOUND)
-  catkin_add_env_hooks(10.${PROJECT_NAME} SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
-  set(LUA_DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION})
+if(BUILD_LUA_RTT)
+  file(GLOB LUA_FILES "lua/*.lua")
+  set(LUA_DESTINATION share)
+  if(catkin_FOUND)
+    catkin_add_env_hooks(10.${PROJECT_NAME} SHELLS sh DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
+    set(LUA_DESTINATION ${CATKIN_GLOBAL_SHARE_DESTINATION})
+  endif()
+
+  install(
+    FILES ${LUA_FILES}
+    DESTINATION ${LUA_DESTINATION}/lua/5.1/${PROJECT_NAME}/
+  )
 endif()
+
 
 orocos_install_headers(
   FILES include/orocos/${PROJECT_NAME}/typekit/Types.hpp
   INSTALL include/orocos/${PROJECT_NAME}/typekit
 )
-install(
-  FILES ${LUA_FILES}
-  DESTINATION ${LUA_DESTINATION}/lua/5.1/${PROJECT_NAME}/
-)
-
 
 orocos_generate_package(
   DEPENDS orocos-kdl
