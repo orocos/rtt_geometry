@@ -13,16 +13,28 @@ class KDLCORBAPluginTest : public testing::Test {
 protected:
     OCL::CorbaDeploymentComponent depl;
     RTT::TaskContext* tc;
+    std::string tmpdir;
 
     KDLCORBAPluginTest():
         depl("Deployer"), tc(0)
     {}
 
+    int system(const std::string& command) {
+        return ::system(command.c_str());
+    }
+
     virtual void SetUp() {
+        // Create temporary directory to hold PID files
+        char tmpdir_c[] = "/tmp/kdl_typekitXXXXXX";
+        ASSERT_TRUE(mkdtemp(tmpdir_c) != NULL);
+        tmpdir = tmpdir_c;
+
         //Start CORBA nameserver (as a fallback if none is running yet)
-        system("omniNames -start -logdir $(mktemp -d) -errlog /dev/null & echo $! > omniNames.pid &");
+        system("omniNames -start -logdir $(mktemp -d) -errlog /dev/null &"
+               "echo $! > " + tmpdir + "/omniNames.pid &");
         //Start server
-        system("./setupcomponent.ops & echo $! > setupcomponent.pid &");
+        system("./setupcomponent.ops &"
+               "echo $! > " + tmpdir + "/setupcomponent.pid &");
         // Wait for server to startup
         sleep(3);
         //Setup corba
@@ -39,8 +51,8 @@ protected:
         depl.shutdownDeployment();
         RTT::corba::TaskContextServer::ShutdownOrb();
         RTT::corba::TaskContextServer::DestroyOrb();
-        system("kill $(cat setupcomponent.pid)");
-        system("kill $(cat omniNames.pid)");
+        system("kill $(cat " + tmpdir + "/setupcomponent.pid)");
+        system("kill $(cat " + tmpdir + "/omniNames.pid)");
     }
 };
 
