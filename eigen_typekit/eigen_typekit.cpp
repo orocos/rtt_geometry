@@ -367,12 +367,12 @@ namespace Eigen{
     };
 
     template<class VectorType>
-    struct vector_index_constructor
+    struct vector_size_constructor
         : public std::unary_function<int,const VectorType&>
     {
         typedef const VectorType& (Signature)( int );
         mutable boost::shared_ptr< VectorType > ptr;
-        vector_index_constructor() :
+        vector_size_constructor() :
             ptr( new VectorType() ){}
         const VectorType& operator()(int size ) const
         {
@@ -430,11 +430,7 @@ namespace Eigen{
 
     bool EigenTypekitPlugin::loadConstructors()
     {
-        RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_constructor<VectorXd>()));
-        RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_index_constructor<Vector2d>()));
-        RTT::types::Types()->type("eigen_vector3")->addConstructor(types::newConstructor(vector_index_constructor<Vector3d>()));
-        RTT::types::Types()->type("eigen_vector4")->addConstructor(types::newConstructor(vector_index_constructor<Vector4d>()));
-        RTT::types::Types()->type("eigen_vector6")->addConstructor(types::newConstructor(vector_index_constructor<Vector6d>()));
+        RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_size_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_value_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_index_array_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_index_value_constructor<Vector2d>()));
