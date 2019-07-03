@@ -29,7 +29,6 @@
 namespace Eigen {
 
 typedef Matrix<double,6,1> Vector6d;
-typedef Matrix<double,6,6> Matrix6d;
 
 class EigenTypekitPlugin: public RTT::types::TypekitPlugin {
 public:
@@ -116,7 +115,6 @@ public:
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix2d)
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix3d)
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix4d)
-    DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix6d)
 #endif
 #ifdef ORO_CORELIB_DATASOURCES_HPP
 #define DECLARE_MATRIX_ORO_CORELIB_DATASOURCES_HPP(MatrixType) \
@@ -128,28 +126,24 @@ public:
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix2d)
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix3d)
     DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix4d)
-    DECLARE_MATRIX_CORELIB_DATASOURCE_HPP(Eigen::Matrix6d)
 #endif
 #ifdef ORO_OUTPUT_PORT_HPP
     extern template class RTT::OutputPort< Eigen::MatrixXd >;
     extern template class RTT::OutputPort< Eigen::Matrix2d >;
     extern template class RTT::OutputPort< Eigen::Matrix3d >;
     extern template class RTT::OutputPort< Eigen::Matrix4d >;
-    extern template class RTT::OutputPort< Eigen::Matrix6d >;
 #endif
 #ifdef ORO_INPUT_PORT_HPP
     extern template class RTT::InputPort< Eigen::MatrixXd >;
     extern template class RTT::InputPort< Eigen::Matrix2d >;
     extern template class RTT::InputPort< Eigen::Matrix3d >;
     extern template class RTT::InputPort< Eigen::Matrix4d >;
-    extern template class RTT::InputPort< Eigen::Matrix6d >;
 #endif
 #ifdef ORO_PROPERTY_HPP
     extern template class RTT::Property< Eigen::MatrixXd >;
     extern template class RTT::Property< Eigen::Matrix2d >;
     extern template class RTT::Property< Eigen::Matrix3d >;
     extern template class RTT::Property< Eigen::Matrix4d >;
-    extern template class RTT::Property< Eigen::Matrix6d >;
 #endif
 #ifdef ORO_CORELIB_ATTRIBUTE_HPP
 #define DECLARE_MATRIX_ORO_CORELIB_ATTRIBUTE_HPP(MatrixType) \
@@ -160,7 +154,6 @@ public:
     DECLARE_MATRIX_ORO_CORELIB_ATTRIBUTE_HPP(Eigen::Matrix2d)
     DECLARE_MATRIX_ORO_CORELIB_ATTRIBUTE_HPP(Eigen::Matrix3d)
     DECLARE_MATRIX_ORO_CORELIB_ATTRIBUTE_HPP(Eigen::Matrix4d)
-    DECLARE_MATRIX_ORO_CORELIB_ATTRIBUTE_HPP(Eigen::Matrix6d)
 #endif
 
 #endif // ifndef EIGEN_TYPEKIT_HPP

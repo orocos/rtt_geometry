@@ -72,7 +72,6 @@ DECLARE_RTT_MATRIX_EXPORTS( Eigen::MatrixXd )
 DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix2d )
 DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix3d )
 DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix4d )
-DECLARE_RTT_MATRIX_EXPORTS( Eigen::Matrix6d )
 
 #include <Eigen/Core>
 namespace Eigen{
@@ -424,7 +423,6 @@ namespace Eigen{
         RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix2d>("eigen_matrix2") );
         RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix3d>("eigen_matrix3") );
         RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix4d>("eigen_matrix4") );
-        RTT::types::TypeInfoRepository::Instance()->addType( new MatrixTypeInfo<Matrix6d>("eigen_matrix6") );
         return true;
     }
 
@@ -445,7 +443,6 @@ namespace Eigen{
         RTT::types::Types()->type("eigen_matrix2")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix2d>()));
         RTT::types::Types()->type("eigen_matrix3")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix3d>()));
         RTT::types::Types()->type("eigen_matrix4")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix4d>()));
-        RTT::types::Types()->type("eigen_matrix6")->addConstructor(types::newConstructor(matrix_i_j_constructor<Matrix6d>()));
         return true;
     }
 
