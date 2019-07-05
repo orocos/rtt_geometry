@@ -345,8 +345,8 @@ namespace Eigen{
         const VectorType& operator()(int size,double value ) const
         {
             ptr->conservativeResizeLike(VectorType::Zero(size));
-            (*ptr)=VectorType::Constant(size,value);
-            return *(ptr);
+            *ptr=VectorType::Constant(size,value);
+            return *ptr;
         }
     };
 
@@ -375,14 +375,14 @@ namespace Eigen{
             ptr( new VectorType ){}
         const VectorType& operator()(std::vector<double> values) const
         {
-            // Explicitely resize rather than use aliasing
+            // Explicitely resize rather than use aliasing implicitely
             if(ptr->size() != values.size() && VectorType::RowsAtCompileTime == Eigen::Dynamic)
             {
-                ptr->conservativeResize(values.size());
+                ptr->resize(values.size());
             }
 
-            (*ptr)=VectorType::Map(&values[0],values.size());
-            return *(ptr);
+            *ptr = VectorType::Map(values.data(),values.size());
+            return *ptr;
         }
     };
 
@@ -398,13 +398,14 @@ namespace Eigen{
         {
             if(ptr->size() != values.size())
             {
-                log(Error) << "Cannot copy an std vector of size " << values.size()
+                log(Debug) << "Cannot copy an std vector of size " << values.size()
                            << " into a fixed size vector of size " << ptr->size()
                            << endlog();
-                return *(ptr);
+                *ptr = VectorType::Constant(values.size(), RTT::internal::NA<double&>::na());
+                return *ptr;
             }
-            (*ptr)=VectorType::Map(&values[0],ptr->size());
-            return *(ptr);
+            *ptr = VectorType::Map(values.data(),ptr->size());
+            return *ptr;
         }
     };
 
@@ -418,8 +419,8 @@ namespace Eigen{
             ptr( new VectorType() ){}
         const VectorType& operator()(int size ) const
         {
-            ptr->conservativeResizeLike(VectorType::Zero(size));
-            return *(ptr);
+            *ptr = VectorType::Zero(size);
+            return *ptr;
         }
     };
 
@@ -444,9 +445,8 @@ namespace Eigen{
             ptr( new MatrixType() ){}
         const MatrixType& operator()(int size1,int size2) const
         {
-            ptr->resize(size1,size2);
-            ptr->setZero();
-            return *(ptr);
+            *ptr = MatrixType::Zero(size1,size2);
+            return *ptr;
         }
     };
 
