@@ -344,7 +344,6 @@ namespace Eigen{
             ptr( new VectorType ){}
         const VectorType& operator()(int size,double value ) const
         {
-            ptr->conservativeResizeLike(VectorType::Zero(size));
             *ptr=VectorType::Constant(size,value);
             return *ptr;
         }
