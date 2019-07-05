@@ -336,43 +336,42 @@ namespace Eigen{
 
     template<class VectorType>
     struct vector_size_value_constructor
-        : public std::binary_function<int,double,const VectorType&>
+        : public std::binary_function<int,double,VectorType>
     {
-        typedef const VectorType& (Signature)( int, double );
+        typedef VectorType (Signature)( int, double );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_size_value_constructor() :
             ptr( new VectorType ){}
-        const VectorType& operator()(int size,double value ) const
+        VectorType operator()(int size,double value ) const
         {
-            *ptr=VectorType::Constant(size,value);
-            return *ptr;
+            return VectorType::Constant(size,value);
         }
     };
 
     template<class VectorType>
     struct vector_fixed_value_constructor
-        : public std::unary_function<double,const VectorType&>
+        : public std::unary_function<double,VectorType>
     {
-        typedef const VectorType& (Signature)( double );
+        typedef VectorType (Signature)( double );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_fixed_value_constructor() :
             ptr( new VectorType ){}
-        const VectorType& operator()(double value) const
+        VectorType operator()(double value) const
         {
             ptr->setConstant(value);
-            return *(ptr);
+            return *ptr;
         }
     };
 
     template<class VectorType>
     struct vector_array_constructor
-        : public std::unary_function<std::vector<double>,const VectorType&>
+        : public std::unary_function<std::vector<double>,VectorType>
     {
         typedef const VectorType& (Signature)( std::vector<double> );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_array_constructor() :
             ptr( new VectorType ){}
-        const VectorType& operator()(std::vector<double> values) const
+        VectorType operator()(std::vector<double> values) const
         {
             // Explicitely resize rather than use aliasing implicitely
             if(ptr->size() != values.size() && VectorType::RowsAtCompileTime == Eigen::Dynamic)
@@ -380,46 +379,42 @@ namespace Eigen{
                 ptr->resize(values.size());
             }
 
-            *ptr = VectorType::Map(values.data(),values.size());
-            return *ptr;
+            return VectorType::Map(values.data(),values.size());
         }
     };
 
     template<class VectorType>
     struct vector_fixed_array_constructor
-        : public std::unary_function<std::vector<double>,const VectorType&>
+        : public std::unary_function<std::vector<double>,VectorType>
     {
-        typedef const VectorType& (Signature)( std::vector<double> );
+        typedef VectorType (Signature)( std::vector<double> );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_fixed_array_constructor() :
             ptr( new VectorType ){}
-        const VectorType& operator()(std::vector<double> values) const
+        VectorType operator()(std::vector<double> values) const
         {
             if(ptr->size() != values.size())
             {
                 log(Debug) << "Cannot copy an std vector of size " << values.size()
-                           << " into a fixed size vector of size " << ptr->size()
+                           << " into an eigen vector of (fixed) size " << ptr->size()
                            << endlog();
-                *ptr = VectorType::Constant(values.size(), RTT::internal::NA<double&>::na());
-                return *ptr;
+                return VectorType::Constant(values.size(), RTT::internal::NA<double&>::na());
             }
-            *ptr = VectorType::Map(values.data(),ptr->size());
-            return *ptr;
+            return VectorType::Map(values.data(),ptr->size());
         }
     };
 
     template<class VectorType>
     struct vector_size_constructor
-        : public std::unary_function<int,const VectorType&>
+        : public std::unary_function<int,VectorType>
     {
-        typedef const VectorType& (Signature)( int );
+        typedef VectorType (Signature)( int );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_size_constructor() :
             ptr( new VectorType() ){}
-        const VectorType& operator()(int size ) const
+        VectorType operator()(int size ) const
         {
-            *ptr = VectorType::Zero(size);
-            return *ptr;
+            return VectorType::Zero(size);
         }
     };
 
@@ -436,16 +431,15 @@ namespace Eigen{
 
     template<typename MatrixType>
     struct matrix_i_j_constructor
-        : public std::binary_function<int,int,const MatrixType&>
+        : public std::binary_function<int,int,MatrixType>
     {
-        typedef const MatrixType& (Signature)( int, int );
+        typedef MatrixType (Signature)( int, int );
         mutable boost::shared_ptr< MatrixType > ptr;
         matrix_i_j_constructor() :
             ptr( new MatrixType() ){}
-        const MatrixType& operator()(int size1,int size2) const
+        MatrixType operator()(int size1,int size2) const
         {
-            *ptr = MatrixType::Zero(size1,size2);
-            return *ptr;
+            return MatrixType::Zero(size1,size2);
         }
     };
 
