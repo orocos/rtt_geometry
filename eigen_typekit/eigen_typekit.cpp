@@ -367,19 +367,14 @@ namespace Eigen{
     struct vector_array_constructor
         : public std::unary_function<std::vector<double>,VectorType>
     {
-        typedef const VectorType& (Signature)( std::vector<double> );
+        typedef VectorType (Signature)( std::vector<double> );
         mutable boost::shared_ptr< VectorType > ptr;
         vector_array_constructor() :
             ptr( new VectorType ){}
         VectorType operator()(std::vector<double> values) const
         {
-            // Explicitely resize rather than use aliasing implicitely
-            if(ptr->size() != values.size() && VectorType::RowsAtCompileTime == Eigen::Dynamic)
-            {
-                ptr->resize(values.size());
-            }
-
-            return VectorType::Map(values.data(),values.size());
+            *ptr = VectorType::Map(values.data(),values.size());
+            return *ptr;
         }
     };
 
