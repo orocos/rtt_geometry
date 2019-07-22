@@ -339,27 +339,9 @@ namespace Eigen{
         : public std::binary_function<int,double,VectorType>
     {
         typedef VectorType (Signature)( int, double );
-        mutable boost::shared_ptr< VectorType > ptr;
-        vector_size_value_constructor() :
-            ptr( new VectorType ){}
         VectorType operator()(int size,double value ) const
         {
             return VectorType::Constant(size,value);
-        }
-    };
-
-    template<class VectorType>
-    struct vector_fixed_value_constructor
-        : public std::unary_function<double,VectorType>
-    {
-        typedef VectorType (Signature)( double );
-        mutable boost::shared_ptr< VectorType > ptr;
-        vector_fixed_value_constructor() :
-            ptr( new VectorType ){}
-        VectorType operator()(double value) const
-        {
-            ptr->setConstant(value);
-            return *ptr;
         }
     };
 
@@ -368,13 +350,9 @@ namespace Eigen{
         : public std::unary_function<std::vector<double>,VectorType>
     {
         typedef VectorType (Signature)( std::vector<double> );
-        mutable boost::shared_ptr< VectorType > ptr;
-        vector_array_constructor() :
-            ptr( new VectorType ){}
         VectorType operator()(std::vector<double> values) const
         {
-            *ptr = VectorType::Map(values.data(),values.size());
-            return *ptr;
+            return VectorType::Map(values.data(),values.size());
         }
     };
 
@@ -383,19 +361,18 @@ namespace Eigen{
         : public std::unary_function<std::vector<double>,VectorType>
     {
         typedef VectorType (Signature)( std::vector<double> );
-        mutable boost::shared_ptr< VectorType > ptr;
-        vector_fixed_array_constructor() :
-            ptr( new VectorType ){}
         VectorType operator()(std::vector<double> values) const
         {
-            if(ptr->size() != values.size())
+            int size = VectorType::RowsAtCompileTime;
+            if(size != Eigen::Dynamic && size != values.size())
             {
                 log(Debug) << "Cannot copy an std vector of size " << values.size()
-                           << " into an eigen vector of (fixed) size " << ptr->size()
+                           << " into an eigen vector of (fixed) size " << size
                            << endlog();
-                return VectorType::Constant(values.size(), RTT::internal::NA<double&>::na());
+                return VectorType::Constant(size, RTT::internal::NA<double&>::na());
             }
-            return VectorType::Map(values.data(),ptr->size());
+            // NOTE: this can resize the eigen_vector
+            return VectorType::Map(values.data(),values.size());
         }
     };
 
@@ -404,9 +381,6 @@ namespace Eigen{
         : public std::unary_function<int,VectorType>
     {
         typedef VectorType (Signature)( int );
-        mutable boost::shared_ptr< VectorType > ptr;
-        vector_size_constructor() :
-            ptr( new VectorType() ){}
         VectorType operator()(int size ) const
         {
             return VectorType::Zero(size);
@@ -429,9 +403,6 @@ namespace Eigen{
         : public std::binary_function<int,int,MatrixType>
     {
         typedef MatrixType (Signature)( int, int );
-        mutable boost::shared_ptr< MatrixType > ptr;
-        matrix_i_j_constructor() :
-            ptr( new MatrixType() ){}
         MatrixType operator()(int size1,int size2) const
         {
             return MatrixType::Zero(size1,size2);
@@ -461,12 +432,7 @@ namespace Eigen{
     {
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_size_constructor<VectorXd>()));
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_size_value_constructor<VectorXd>()));
-        
-        RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_fixed_value_constructor<Vector2d>()));
-        RTT::types::Types()->type("eigen_vector3")->addConstructor(types::newConstructor(vector_fixed_value_constructor<Vector3d>()));
-        RTT::types::Types()->type("eigen_vector4")->addConstructor(types::newConstructor(vector_fixed_value_constructor<Vector4d>()));
-        RTT::types::Types()->type("eigen_vector6")->addConstructor(types::newConstructor(vector_fixed_value_constructor<Vector6d>()));
-        
+
         RTT::types::Types()->type("eigen_vector")->addConstructor(types::newConstructor(vector_array_constructor<VectorXd>(),true));
         RTT::types::Types()->type("eigen_vector2")->addConstructor(types::newConstructor(vector_fixed_array_constructor<Vector2d>(),true));
         RTT::types::Types()->type("eigen_vector3")->addConstructor(types::newConstructor(vector_fixed_array_constructor<Vector3d>(),true));
