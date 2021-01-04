@@ -2,6 +2,18 @@
 Changelog for package kdl_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.4 (2021-01-04)
+------------------
+* Merge pull request `#32 <https://github.com/orocos/rtt_geometry/issues/32>`_ from orocos/fix/kdl_typekit-writable-source
+  Fix unit tests in kdl_typekit on Travis
+* kdl_typekit: fix read-only filesystem error when running unit tests on Travis CI with non-writable source-space
+* Merge pull request `#31 <https://github.com/orocos/rtt_geometry/issues/31>`_ from ahoarau/patch-1
+  env-hooks: only install env-hook if BUILD_LUA_RTT is enabled
+* add option that defaults on
+* env-hooks: only install env-hook if BUILD_LUA_RTT is enabled
+  Similar to https://github.com/orocos-toolchain/ocl/commit/eb4575516af295955f341097e62da92772ccc2f1
+* Contributors: Antoine Hoarau, Johannes Meyer
+
 2.9.3 (2019-06-03)
 ------------------
 * Merge pull request `#30 <https://github.com/orocos/rtt_geometry/issues/30>`_ from achim-k/toolchain-2.9

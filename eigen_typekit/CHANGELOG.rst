@@ -2,6 +2,24 @@
 Changelog for package eigen_typekit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.9.4 (2021-01-04)
+------------------
+* Merge pull request `#26 <https://github.com/orocos/rtt_geometry/issues/26>`_ from ahoarau/fixed_size_vectors
+  Add fixed size vectors
+* addressing `#34 <https://github.com/orocos/rtt_geometry/issues/34>`_ v2 - returning temporaries
+* fix last commit
+* addressing `#34 <https://github.com/orocos/rtt_geometry/issues/34>`_
+  https://github.com/orocos/rtt_geometry/issues/34
+* remove unecessary function
+* taking care of @meyerj comments
+* fix fixed sized constructors
+* remove matrix6
+* rename vector index to vector size
+* add fixed size matrices
+  + Vector6d/Matrix6d
+* add eigen_vector2/3/4
+* Contributors: Antoine Hoarau, Johannes Meyer
+
 2.9.3 (2019-06-03)
 ------------------
 
