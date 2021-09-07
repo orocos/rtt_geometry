@@ -2,18 +2,19 @@ cmake_minimum_required(VERSION 2.8.3)
 project(eigen_typekit)
 
 find_package(Eigen3 QUIET)
-if(NOT Eigen3_FOUND)
-  find_package(cmake_modules QUIET)
-  find_package(Eigen QUIET)
-  if(Eigen_FOUND)
-    set(EIGEN3_INCLUDE_DIRS ${Eigen_INCLUDE_DIRS})
-    set(EIGEN3_DEFINITIONS ${Eigen_DEFINITIONS})
-    set(EIGEN3_VERSION_STRING ${PC_EIGEN_VERSION})
-  else()
-    message(FATAL_ERROR "Could not find cmake package Eigen3 or Eigen, which is required to build ${PROEJECT_NAME}.")
-  endif()
+
+if(NOT EIGEN3_FOUND)
+  # Fallback to cmake_modules
+  find_package(cmake_modules REQUIRED)
+  find_package(Eigen REQUIRED)
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN_INCLUDE_DIRS})
+  set(EIGEN3_LIBRARIES ${EIGEN_LIBRARIES})  # Not strictly necessary as Eigen is head only
+  # Possibly map additional variables to the EIGEN3_ prefix.
+else()
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
 endif()
-message(STATUS "Found Eigen version ${EIGEN3_VERSION_STRING} at ${EIGEN3_INCLUDE_DIRS}.")
+# Use ${EIGEN3_...} variables in either case below
+
 add_definitions(${EIGEN3_DEFINITIONS})
 include_directories(${EIGEN3_INCLUDE_DIRS})
 
